@@ -8,7 +8,9 @@
     "start": "cross-env PORT=10888 react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "source": "git remote set-url origin https://github.com/CleFerMy/eco_source.git",
+    "public": "git remote set-url origin https://github.com/CleFerMy/eco.git"
   },
   "keywords": [],
   "author": "",
