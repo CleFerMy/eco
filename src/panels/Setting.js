@@ -13,12 +13,15 @@ const osname = platform();
 
 const Setting = props => (
 	<Panel id={ props.id }>
-		<PanelHeader addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Настройки</PanelHeader>
-        <List>
+		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Настройки</PanelHeader>
+        <div class="hleft"></div><div class="hright"></div>
+        <div className="profile" >
+        <List style={ { 'border-radius': '0 0 25px 25px' } } >
             <Cell multiline={true} target="_blank" href={ `https://vk.com/id${ props.state.user.id }`} photo={ props.state.user.photo_200 } description={ `Открыть профиль` } before={ <Avatar src={ props.state.user.photo_200 }/> }>
                 { `${ props.state.user.first_name } ${ props.state.user.last_name }` }
             </Cell>
         </List>
+        </div>
         <Group>
             <List>
                 <Cell multiline={true} expandable before={ <Avatar style={ { background: 'none' } } size={28} indicator="Включены" ><Icon24Notification /></Avatar> }>Уведомления</Cell>

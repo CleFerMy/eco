@@ -14,8 +14,12 @@ const osname = platform();
 
 const Home = props => (
 	<Panel id={ props.id }>
-		<PanelHeader addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Имущество</PanelHeader>
-        <Div>
+		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Имущество</PanelHeader>
+        <div class="hleft"></div><div class="hright"></div>
+        <div className='balance'>
+            <Button before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+        </div>
+        <Div style={ { 'margin-top': 50 } }>
             <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
         </Div>
         <Group title="Дома">
@@ -33,9 +37,6 @@ const Home = props => (
                 <Cell expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Flash /></Avatar>} description="LADA (ВАЗ) 2112" >Основной автомобиль</Cell>
             </List>
         </Group>
-        <div className='balance'>
-			<Button onClick={ props.go } data-to="money"  before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
-		</div>
 		<div className='setting'>
 			<div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
 		</div>

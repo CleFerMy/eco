@@ -13,8 +13,12 @@ const osname = platform();
 
 const Money = props => (
 	<Panel id={ props.id }>
-		<PanelHeader  addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Баланс</PanelHeader>
-        <Group title="Основной счёт">
+		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Баланс</PanelHeader>
+        <div class="header"><div class="hleft"></div><div class="hright"></div></div>
+        <div className='balance'>
+            <Button before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+        </div>
+        <Group style={ { 'margin-top': 50 } } title="Основной счёт">
             <List>
                 <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="var(--white)" /></Avatar> } description="1000 единиц">Ридий</Cell>
                 <Cell multiline={true} before={<CircularProgressbar className="moneyitem" percentage={5} text={`50`} background styles={ { background: { fill: '#0a4761' }, path: { stroke: 'white' }, text: { fill: 'white', fontSize: '16px' }, trail: { stroke: 'transparent' } } } />} description="Занято 50 из 1000">Неунум</Cell>
@@ -26,11 +30,20 @@ const Money = props => (
                 <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #316</Cell>
                 <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #482</Cell>
                 <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #521</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="10 неунума">Банк "Рядом" Счёт #311</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #316</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #482</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #521</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="10 неунума">Банк "Рядом" Счёт #311</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #316</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #482</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #521</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="10 неунума">Банк "Рядом" Счёт #311</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #316</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #482</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar> } description="Пусто">Банк "Рядом" Счёт #521</Cell>
             </List>
         </Group>
-        <div className='balance'>
-            <Button before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
-        </div>
         <div className='setting'>
             <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
         </div>

@@ -101,12 +101,20 @@ html, body {
     background-image: url(../img/user_red.svg);
 }
 
-.balance {
+.mbalance {
     display: flex;
     justify-content: center;
     position: absolute;
     width: 100%;
     bottom: 20px;
+}
+
+.balance {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .moneyitem {
@@ -125,7 +133,7 @@ html, body {
     color: black;
 }
 
-.setting {
+.msetting {
     display: flex;
     justify-content: flex-end;
     position: absolute;
@@ -135,88 +143,44 @@ html, body {
     z-index: 10;
 }
 
-.header {
+.setting {
+    display: flex;
+    justify-content: center;
     position: absolute;
-    height: 50px;
     width: 100%;
+    bottom: 20px;
 }
 
 .hleft {
-    position: absolute;
+    position: fixed;
     height: 50px;
     width: 50px;
-    background: #5181b8;
-}
-
-.hleft:after {
-    content: '';
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    background: #ebedf0;
-    border-radius: 20px 0 0 0;
+    background-image: url(../img/left.svg);
+    z-index: 100;
 }
 
 .hright {
-    position: absolute;
+    position: fixed;
     right: 0;
     height: 50px;
     width: 50px;
-    background: #5181b8;
+    background-image: url(../img/right.svg);
+    z-index: 100;
 }
 
-.hright:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    height: 50px;
-    width: 50px;
-    background: #ebedf0;
-    border-radius: 0 20px 0 0;
+.profile > .List--ios::before, .profile > .List--ios::after {
+    content: none;
 }
 
-.bottom {
-    position: absolute;
-    height: 10px;
-    width: 100%;
-    bottom: 0;
-    background: #5181b8;
+.Group--ios::before, .Group--ios::after {
+    content: none;
 }
 
-.bleft {
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    bottom: 5px;
-    background: #5181b8;
+.Group {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.bleft:after {
-    content: '';
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    bottom: 5px;
-    background: #ebedf0;
-    border-radius: 0 0 0 20px;
-}
-
-.bright {
-    position: absolute;
-    right: 0;
-    height: 50px;
-    width: 50px;
-    bottom: 5px;
-    background: #5181b8;
-}
-
-.bright:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    height: 50px;
-    width: 50px;
-    bottom: 5px;
-    background: #ebedf0;
-    border-radius: 0 0 20px 0;
+.Group, .List {
+    border-radius: 20px;
 }
