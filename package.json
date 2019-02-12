@@ -11,8 +11,7 @@
     "deploy": "gh-pages -d build",
     "source": "git remote set-url origin https://github.com/CleFerMy/eco_source.git",
     "public": "git remote set-url origin https://github.com/CleFerMy/eco.git",
-    "pull": "git pull --rebase origin master",
-    "push": "git push -u origin master"
+    "push": "git push origin master --force"
   },
   "keywords": [],
   "author": "",
