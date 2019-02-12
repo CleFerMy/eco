@@ -19,7 +19,7 @@ const Main = props => (
 			</HorizontalScroll>
 		</div>
 		<div className='mbalance'>
-			<Button onClick={ props.go } data-to="money"  before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+			<Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
 		</div>
 		<div className='msetting'>
 			<div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>

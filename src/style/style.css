@@ -177,10 +177,40 @@ html, body {
 }
 
 .Group {
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .Group, .List {
-    border-radius: 20px;
+    border-radius: 25px;
+}
+
+.Cell:first-child:last-child > .Tappable {
+    border-radius: 25px;
+}
+
+.Cell:first-child > .Tappable {
+    border-radius: 25px 25px 0 0;
+}
+
+.Cell:last-child > .Tappable {
+    border-radius: 0 0 25px 25px ;
+}
+
+.homeframeimg {
+    display: flex;
+    justify-content: center;
+    height: 200px;
+}
+
+.homeframeimg > img {
+    height: 200px;
+    width: 200px;
+    background: #e2e4e7;
+    border-radius: 25px;
+}
+
+.homeframename {
+    display: flex;
+    justify-content: center;
 }

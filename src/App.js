@@ -8,6 +8,7 @@ import Main from './panels/Main';
 import Setting from './panels/Setting';
 import Money from './panels/Money';
 import Home from './panels/Home';
+import HomeFrame from './panels/HomeFrame';
 
 class App extends React.Component {
 	constructor(props) {
@@ -60,6 +61,7 @@ async Pop ( e ) {
 					<Setting 	id="setting" 	state={this.state} go={this.go} />
 					<Money 		id="money" 		state={this.state} go={this.go} />
 					<Home 		id="home" 		state={this.state} go={this.go} />
+					<HomeFrame	id="homeframe"	state={this.state} go={this.go} />
 				</View>
 			</Epic>
 		);
