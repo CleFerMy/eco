@@ -58,7 +58,6 @@ class App extends React.Component {
 	}
 
 	async money ( method, params ) {
-		await window.history.pushState( { panel: 'main' }, `main` );
 		let res 	= await fetch( `https://clefer.ru/eco/main.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
 		if ( data.response ) {

@@ -1,6 +1,6 @@
 {
   "name": "eco",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "homepage": "https://clefermy.github.io/eco/",
@@ -12,7 +12,7 @@
     "source": "git remote set-url origin https://github.com/CleFerMy/eco_source.git",
     "public": "git remote set-url origin https://github.com/CleFerMy/eco.git",
     "push": "git push origin master --force",
-    "commit": "npm run public && npm run deploy && npm run source && npm run push"
+    "commit": "npm run source && npm run push && npm run public && npm run deploy"
   },
   "keywords": [],
   "author": "",
