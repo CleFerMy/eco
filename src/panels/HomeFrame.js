@@ -14,11 +14,11 @@ const osname = platform();
 const HomeFrame = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Информация</PanelHeader>
-        <div class="hleft"></div><div class="hright"></div>
+        <div className="hleft"></div><div className="hright"></div>
         <div className='balance'>
-            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
         </div>
-        <Div className="homeframeimg" style={ { 'margin-top': 50 } }><img className="notifimage" src={ Home } alt="картиночка" /></Div>
+        <Div className="homeframeimg" style={ { 'marginTop': 50 } }><img className="notifimage" src={ Home } alt="картиночка" /></Div>
         <Div className="homeframename" >Дом</Div>
         <Div className="homeframename" >ул. Крылова, д.1</Div>
         <Group title="Жители">

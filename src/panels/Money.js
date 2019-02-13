@@ -14,13 +14,13 @@ const osname = platform();
 const Money = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Баланс</PanelHeader>
-        <div class="header"><div class="hleft"></div><div class="hright"></div></div>
+        <div className="header"><div className="hleft"></div><div className="hright"></div></div>
         <div className='balance'>
-            <Button before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+            <Button onClick={ () => props.money( '1', {}) } before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
         </div>
-        <Group style={ { 'margin-top': 50 } } title="Основной счёт">
+        <Group style={ { 'marginTop': 50 } } title="Основной счёт">
             <List>
-                <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="var(--white)" /></Avatar> } description="1000 единиц">Ридий</Cell>
+                <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="var(--white)" /></Avatar> } description={ props.state.money.c1 ? ( props.state.money.c1 + props.decnum( props.state.money.c1,[ ' единица',' единицы',' единиц' ] ) ) : 'Неизвестно' }>Ридий</Cell>
                 <Cell multiline={true} before={<CircularProgressbar className="moneyitem" percentage={5} text={`50`} background styles={ { background: { fill: '#0a4761' }, path: { stroke: 'white' }, text: { fill: 'white', fontSize: '16px' }, trail: { stroke: 'transparent' } } } />} description="Занято 50 из 1000">Неунум</Cell>
             </List>
         </Group>

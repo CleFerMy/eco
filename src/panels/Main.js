@@ -6,8 +6,8 @@ import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 const Main = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } >Eco</PanelHeader>
-		<div class="hleft"></div><div class="hright"></div>
-		<div class="menu">
+		<div className="hleft"></div><div className="hright"></div>
+		<div className="menu">
 			<HorizontalScroll>
 				<div className="statslist">
 					<div onClick={ props.go } data-to="home" className="statsitem statsitem_1"><span className="statsspan">Дом</span><div className="statsitemdesc">1</div></div>
@@ -19,7 +19,7 @@ const Main = props => (
 			</HorizontalScroll>
 		</div>
 		<div className='mbalance'>
-			<Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>1 000</Button>
+			<Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
 		</div>
 		<div className='msetting'>
 			<div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
