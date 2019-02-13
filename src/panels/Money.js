@@ -16,7 +16,7 @@ const Money = props => (
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Баланс</PanelHeader>
         <div className="header"><div className="hleft"></div><div className="hright"></div></div>
         <div className='balance'>
-            <Button onClick={ () => props.money( '1', {}) } before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+            <Button before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
         </div>
         <Group style={ { 'marginTop': 50 } } title="Основной счёт">
             <List>

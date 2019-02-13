@@ -52,6 +52,16 @@ html, body {
     cursor: pointer;
 }
 
+.statsitem:hover {
+    transition: 0.7s;
+    opacity: 0.7;
+}
+
+.statsitem:active {
+    transition: 0.2s;
+    opacity: 0.5;
+}
+
 .statsitem:last-child {
     margin-right: 0;
 }
@@ -214,3 +224,7 @@ html, body {
     display: flex;
     justify-content: center;
 }
+
+.kn {
+    justify-content: center;
+  }
