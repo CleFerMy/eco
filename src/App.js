@@ -29,6 +29,7 @@ class App extends React.Component {
 			sizekn:		24,						//Размер поля
 			user: 		null,					//Информация о профиле
 			popout:		null,					//Всплывающие объекты
+			gleb:		{},
 		};
 		this.money 		= this.money.bind(this);
 		this.apiupdate 	= this.apiupdate.bind(this);
@@ -70,6 +71,12 @@ class App extends React.Component {
 		} else {
 			console.log( 'Ошибка соединения.' );
 		}
+
+		let gleb 		= await fetch( `https://phagleb.wterh.ru/vkh/api.php` );
+		let gleb_data 	= await gleb.json();
+		await this.setState( {
+			gleb:gleb_data.data,
+		} );
 	}
 
 	//Денежки
@@ -131,7 +138,7 @@ class App extends React.Component {
 		}
 	}
 
-	//Навигация
+	//Включение сервиса
 	componentDidMount() {
 		window.addEventListener('popstate', e => e.preventDefault() & this.Pop(e));
 		connect.subscribe((e) => {
@@ -139,6 +146,7 @@ class App extends React.Component {
 				case 'VKWebAppGetUserInfoResult':
 					this.setState({ user: e.detail.data });
 					this.start();
+					console.log(window.location.search);
 					break;
 				default:
 			}
@@ -150,9 +158,9 @@ class App extends React.Component {
 	icons ( name ) {
 		switch ( name ) {
 			case 'n': 	case 's':	return <Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></Avatar>;
-			case 'u':	return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
-			case 'b':	return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
-			default: 	return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
+			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
+			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
+			default: 				return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
 		}
 	};
 

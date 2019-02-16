@@ -17,8 +17,8 @@ const Setting = props => (
         <div className="hleft"></div><div className="hright"></div>
         <div className="profile" >
         <List style={ { 'borderRadius': '0 0 25px 25px' } } >
-            <Cell multiline={true} target="_blank" href={ `https://vk.com/id${ props.state.user.id }`} photo={ props.state.user.photo_200 } description={ `Открыть профиль` } before={ <Avatar src={ props.state.user.photo_200 }/> }>
-                { `${ props.state.user.first_name } ${ props.state.user.last_name }` }
+            <Cell multiline={true} target="_blank" href={ `https://vk.com/id${ props.state.user ? (props.state.user.id) : (`0`) }`} description={ `Открыть профиль` } before={ <Avatar src={ props.state.user ? (props.state.user.photo_200) : (`https://vk.com/images/camera_400.png?ava=1`) }/> }>
+                { `${ props.state.user ? (props.state.user.first_name) : (`Имя`) } ${ props.state.user ? (props.state.user.last_name) : (`Фамилия`) }` }
             </Cell>
         </List>
         </div>

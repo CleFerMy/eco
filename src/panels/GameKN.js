@@ -23,7 +23,7 @@ const KN = props => (
                     <div>
                         <Group style={ { 'marginTop': 50 } }>
                             <Div>
-                                { props.state.kn.win == 's' && <FormStatus style={ { 'marginBottom': 25 } } title={`Ваш ход. Ставка: 10 очков.`}></FormStatus> }
+                                { props.state.kn.win === 's' && <FormStatus style={ { 'marginBottom': 25 } } title={`Ваш ход. Ставка: 10 очков.`}></FormStatus> }
                                 { props.state.kn.win !== 's' && <FormStatus style={ { 'marginBottom': 25 } } title={`Вы ${ win[props.state.kn.win] }`}></FormStatus> }
                                 <div className="kn" style={ { display: 'flex' } }>
                                     <Button disabled={ props.state.kndisabled || props.state.kn.p[1] !== 'n' || props.state.kn.win !== 's' } onClick={ ( e ) => props.kn( e ) } data-m="3" data-p="{h:1}" size="m" level="secondary" style={{ marginLeft: 4, background: props.state.kn.wins[1] === 'y' && `#8ac176` }}>{ props.icons( props.state.kn.p[1] ) }</Button>
@@ -49,14 +49,14 @@ const KN = props => (
                         </Group>
                     </div>
                 ) : (
-                    <div>
+                    <div style={ { 'marginTop': 50 } }>
                         <Footer>Игровое поле игры не получено.<br /><Button style={ { marginTop: 10 } } onClick={ ( e ) => props.apiupdate( e ) } data-type="kn" level="secondary">Повторить</Button></Footer>
                     </div>
                 ) }
             </div>
         ) :
         (
-            <div>
+            <div style={ { 'marginTop': 50 } }>
                 <Footer>Данные игры не получены.<br /><Button style={ { marginTop: 10 } } onClick={ ( e ) => props.apiupdate( e ) } data-type="kn" level="secondary">Повторить</Button></Footer>
             </div>
         ) }
