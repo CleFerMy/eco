@@ -2,7 +2,6 @@ import React from 'react';
 import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
-
 import Icon24Info from '@vkontakte/icons/dist/24/info';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
@@ -36,7 +35,7 @@ const Setting = props => (
         <Group>
             <List>
                 <Cell multiline={true} expandable before={ <Avatar style={ { background: 'none' } } size={28}><Icon24Help /></Avatar> } indicator="0 статей" >Помощь</Cell>
-                <Cell multiline={true} expandable before={ <Avatar style={ { background: 'none' } } size={28}><Icon24Info /></Avatar> }>О сервисе</Cell>
+                <Cell multiline={true} expandable onClick={ props.go } data-to="about" before={ <Avatar style={ { background: 'none' } } size={28}><Icon24Info /></Avatar> }>О сервисе</Cell>
             </List>
         </Group>
 	</Panel>

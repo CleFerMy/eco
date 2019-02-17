@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, HorizontalScroll, Button, Avatar } from '@vkontakte/vkui';
+import { Panel, PanelHeader } from '@vkontakte/vkui';
 
 const Main = props => (
 	<Panel id={ props.id }>

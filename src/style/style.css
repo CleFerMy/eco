@@ -249,10 +249,15 @@ html, body {
     border-radius: 15px;
 }
   
-  .Button--android.Button--sz-l {
+.Button--android.Button--sz-l {
     border-radius: 18px;
 }
   
-  .Button--android.Button--sz-xl {
+.Button--android.Button--sz-xl {
     border-radius: 10px;
+}
+
+.About {
+    display: block;
+    margin: 20px auto;
 }

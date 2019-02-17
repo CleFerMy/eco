@@ -15,6 +15,7 @@ import Money from './panels/Money';
 import Home from './panels/Home';
 import HomeFrame from './panels/HomeFrame';
 import GameKN from './panels/GameKN';
+import About from './panels/About';
 
 const osname = platform();
 
@@ -31,6 +32,7 @@ class App extends React.Component {
 			user: 		null,					//Информация о профиле
 			popout:		null,					//Всплывающие объекты
 			menuhide:	false,					//Скрытие уведомления про меню
+			version:	'Beta 1.0, build 5',	//Версия сервиса
 		};
 		this.money 		= this.money.bind(this);
 		this.apiupdate 	= this.apiupdate.bind(this);
@@ -199,6 +201,7 @@ class App extends React.Component {
 					<Home 		id="home" 		state={this.state} go={this.go} decnum={this.decnum} />
 					<HomeFrame	id="homeframe"	state={this.state} go={this.go} decnum={this.decnum} />
 					<GameKN		id="kn"			state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} icons={this.icons} kn={this.kn} openSheet={this.openSheet} />
+					<About		id="about" 		state={this.state} go={this.go} decnum={this.decnum} />
 				</View>
 			</Epic>
 		);
