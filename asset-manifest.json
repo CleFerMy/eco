@@ -1,15 +1,16 @@
 {
-  "main.css": "static/css/main.08896f56.css",
-  "main.css.map": "static/css/main.08896f56.css.map",
-  "main.js": "static/js/main.74c68d08.js",
-  "main.js.map": "static/js/main.74c68d08.js.map",
+  "main.css": "static/css/main.c1f38b5b.css",
+  "main.css.map": "static/css/main.c1f38b5b.css.map",
+  "main.js": "static/js/main.5cb0eec7.js",
+  "main.js.map": "static/js/main.5cb0eec7.js.map",
+  "static\\media\\bank.svg": "static/media/bank.b1ee7ffe.svg",
   "static\\media\\circle.svg": "static/media/circle.5d64416f.svg",
   "static\\media\\cross.svg": "static/media/cross.ca3cb1e8.svg",
+  "static\\media\\game.svg": "static/media/game.51cb987c.svg",
   "static\\media\\home.png": "static/media/home.7852d2a2.png",
+  "static\\media\\home.svg": "static/media/home.e1b5570a.svg",
+  "static\\media\\job.svg": "static/media/job.66bb2d01.svg",
   "static\\media\\left.svg": "static/media/left.1d352a15.svg",
-  "static\\media\\market_blue.svg": "static/media/market_blue.5ae98c3b.svg",
-  "static\\media\\market_yellow.svg": "static/media/market_yellow.4d000fe9.svg",
   "static\\media\\right.svg": "static/media/right.64a9e5ff.svg",
-  "static\\media\\user_green.svg": "static/media/user_green.f1cd146e.svg",
-  "static\\media\\user_red.svg": "static/media/user_red.4a6ea054.svg"
+  "static\\media\\shop.svg": "static/media/shop.ba249130.svg"
 }
