@@ -5,6 +5,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import './style/style.css';
 
 import Icon24Report from '@vkontakte/icons/dist/24/report';
+import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import CircleBot from './img/circle.svg';
 import CrossBot from './img/cross.svg';
 
@@ -29,15 +30,20 @@ class App extends React.Component {
 			sizekn:		24,						//Размер поля
 			user: 		null,					//Информация о профиле
 			popout:		null,					//Всплывающие объекты
-			gleb:		{},
+			menuhide:	false,					//Скрытие уведомления про меню
 		};
 		this.money 		= this.money.bind(this);
 		this.apiupdate 	= this.apiupdate.bind(this);
 		this.kn 		= this.kn.bind(this);
-		this.openSheet 		= this.openSheet.bind(this);
+		this.openSheet 	= this.openSheet.bind(this);
+		this.wcancel	= this.wcancel.bind(this);
 	}
 	
 	go = (e) => { //Смена Panel
+		if ( e.currentTarget.dataset.to === 'time' ) {
+			this.setState( { menuhide:true } );
+			return;
+		}
 		this.setState({ panel: e.currentTarget.dataset.to });
 		window.history.pushState( { panel: e.currentTarget.dataset.to }, `${e.currentTarget.dataset.to}` );
 	};
@@ -71,12 +77,6 @@ class App extends React.Component {
 		} else {
 			console.log( 'Ошибка соединения.' );
 		}
-
-		let gleb 		= await fetch( `https://phagleb.wterh.ru/vkh/api.php` );
-		let gleb_data 	= await gleb.json();
-		await this.setState( {
-			gleb:gleb_data.data,
-		} );
 	}
 
 	//Денежки
@@ -146,12 +146,15 @@ class App extends React.Component {
 				case 'VKWebAppGetUserInfoResult':
 					this.setState({ user: e.detail.data });
 					this.start();
-					console.log(window.location.search);
 					break;
 				default:
 			}
 		});
 		connect.send('VKWebAppGetUserInfo', {});
+	}
+
+	wcancel = ( e ) => {
+		this.setState( { menuhide:false } );
 	}
 
 	//Готовые иконки
@@ -160,6 +163,7 @@ class App extends React.Component {
 			case 'n': 	case 's':	return <Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></Avatar>;
 			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
 			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
+			case 'cancel':			return <div onClick={ () => this.wcancel() }><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></Avatar></div>;
 			default: 				return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
 		}
 	};
@@ -189,7 +193,7 @@ class App extends React.Component {
 		return (
 			<Epic activeStory="home" tabbar={false}>
 				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
-					<Main 		id="main" 		state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} />
+					<Main 		id="main" 		state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} icons={this.icons} wcancel={this.wcancel} />
 					<Setting 	id="setting" 	state={this.state} go={this.go} decnum={this.decnum} />
 					<Money 		id="money" 		state={this.state} go={this.go} decnum={this.decnum} money={this.money} />
 					<Home 		id="home" 		state={this.state} go={this.go} decnum={this.decnum} />

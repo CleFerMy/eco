@@ -91,30 +91,30 @@ html, body {
     text-align: center;
     color: white;
 }
-  
-.statsitem_1 {
-    background-color: #e7e075;
-    background-image: url(../img/market_yellow.svg);
-}
-  
-.statsitem_2 {
+
+.stats_home {
     background-color: #75b4e7;
-    background-image: url(../img/market_blue.svg);
+    background-image: url(../img/home.svg);
 }
 
-.statsitem_3 {
-    background-color: #8ac176;
-    background-image: url(../img/user_green.svg);
+.stats_bank {
+    background-color: #dcdb67;
+    background-image: url(../img/bank.svg);
 }
 
-.statsitem_4 {
-    background-color: #d05555;
-    background-image: url(../img/user_red.svg);
+.stats_shop {
+    background-color: #eea06d;
+    background-image: url(../img/shop.svg);
+}
+  
+.stats_job {
+    background-color: #f67c6f;
+    background-image: url(../img/job.svg);
 }
 
-.statsitem_5 {
-    background-color: #e7e075;
-    background-image: url(../img/market_yellow.svg);
+.stats_game {
+    background-color: #af6fdf;
+    background-image: url(../img/game.svg);
 }
 
 .mbalance {
@@ -239,4 +239,20 @@ html, body {
 
 .kn {
     justify-content: center;
-  }
+}
+
+.Alert--android {
+    border-radius: 12px;
+}
+
+.Button--android.Button--sz-m {
+    border-radius: 15px;
+}
+  
+  .Button--android.Button--sz-l {
+    border-radius: 18px;
+}
+  
+  .Button--android.Button--sz-xl {
+    border-radius: 10px;
+}

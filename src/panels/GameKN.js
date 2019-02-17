@@ -23,8 +23,8 @@ const KN = props => (
                     <div>
                         <Group style={ { 'marginTop': 50 } }>
                             <Div>
-                                { props.state.kn.win === 's' && <FormStatus style={ { 'marginBottom': 25 } } title={`Ваш ход. Ставка: 10 очков.`}></FormStatus> }
-                                { props.state.kn.win !== 's' && <FormStatus style={ { 'marginBottom': 25 } } title={`Вы ${ win[props.state.kn.win] }`}></FormStatus> }
+                                { props.state.kn.win === 's' && <FormStatus style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } title={`Ваш ход. Ставка: 10 очков.`}></FormStatus> }
+                                { props.state.kn.win !== 's' && <FormStatus style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } title={`Вы ${ win[props.state.kn.win] }`}></FormStatus> }
                                 <div className="kn" style={ { display: 'flex' } }>
                                     <Button disabled={ props.state.kndisabled || props.state.kn.p[1] !== 'n' || props.state.kn.win !== 's' } onClick={ ( e ) => props.kn( e ) } data-m="3" data-p="{h:1}" size="m" level="secondary" style={{ marginLeft: 4, background: props.state.kn.wins[1] === 'y' && `#8ac176` }}>{ props.icons( props.state.kn.p[1] ) }</Button>
                                     <Button disabled={ props.state.kndisabled || props.state.kn.p[2] !== 'n' || props.state.kn.win !== 's' } onClick={ ( e ) => props.kn( e ) } data-m="3" data-p="{h:2}" size="m" level="secondary" style={{ marginLeft: 4, background: props.state.kn.wins[2] === 'y' && `#8ac176` }}>{ props.icons( props.state.kn.p[2] ) }</Button>
