@@ -32,7 +32,8 @@ class App extends React.Component {
 			user: 		null,					//Информация о профиле
 			popout:		null,					//Всплывающие объекты
 			menuhide:	false,					//Скрытие уведомления про меню
-			version:	'Beta 1.0, build 5',	//Версия сервиса
+			version:	'Beta 1.0, build 6',	//Версия сервиса
+			contacts:	{},
 		};
 		this.money 		= this.money.bind(this);
 		this.apiupdate 	= this.apiupdate.bind(this);
@@ -70,9 +71,11 @@ class App extends React.Component {
 		let res 	= await fetch( `https://clefer.ru/eco/main.php?`+ window.location.search.replace( '?', '') );
 		let data 	= await res.json();
 		if ( data.response ) {
-			let money = ( data.response.money ) ? data.response.money : {};
+			let money 		= ( data.response.money ) ? data.response.money : {};
+			let contacts 	= ( data.response.contacts ) ? data.response.contacts : {};;
 			await this.setState( {
-				money:	money,
+				money:		money,
+				contacts:	contacts,
 			} );
 		} else if ( data.error ) {
 			console.log( data.error );

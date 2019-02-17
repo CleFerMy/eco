@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Footer } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Footer, Button } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
@@ -19,13 +19,19 @@ const About = props => (
                 <Cell multiline={true} target="_blank" href="https://vk.com/write138269465" description="Разработчик">Обратная связь</Cell>
             </List>
         </Group>
-        <Group title="партнёры">
-            <List>
-                <Cell multiline={true} target="_blank" href="https://vk.com/app6782703" before={ <Avatar src="https://pp.userapi.com/c844722/v844722035/155da2/zkMGu4sigXE.jpg" /> } description="Разработчик: Максим Смирнов">Зайки</Cell>
-                <Cell multiline={true} target="_blank" href="https://vk.com/app6856236" before={ <Avatar src="https://vk.com/images/dquestion_d.png" /> } description="Разработчик: Глеб Фараонов">VK Health</Cell>
-                <Cell multiline={true} target="_blank" href="https://vk.com/app6784987" before={ <Avatar src="https://pp.userapi.com/c844320/v844320287/14f699/cMOKctN2RGg.jpg" /> } description="Разработчик: Матвей Вишневский">Клубника</Cell>
-            </List>
-        </Group>
+        { props.state.contacts.length > 0 ? (
+            <div>
+                <Group title="партнёры">
+                    <List>
+                        { props.state.contacts.map( list => <Cell multiline={true} target="_blank" href={ `${list.url}` } before={ <Avatar src={ list.img }/> } description={ `Разработчик: ${list.author}` }>{ list.name }</Cell> ) }
+                    </List>
+                </Group>
+            </div>
+        ) : (
+            <div>
+                <Footer>Список партнёров пуст.<br /><Button style={ { marginTop: 10 } } data-type="more" level="secondary">Повторить</Button></Footer>
+            </div>
+        ) }
 		<div className='setting'>
 			<div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
 		</div>
