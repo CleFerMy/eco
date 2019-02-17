@@ -14,6 +14,8 @@ import Setting from './panels/Setting';
 import Money from './panels/Money';
 import Home from './panels/Home';
 import HomeFrame from './panels/HomeFrame';
+import Job from './panels/Job';
+import JobFrame from './panels/JobFrame';
 import GameKN from './panels/GameKN';
 import About from './panels/About';
 
@@ -183,14 +185,22 @@ class App extends React.Component {
 					<p>Если вы начнёте новую игру, вам будет засчитано поражение.</p>
 				</Alert>
 			} );
-			break;
-		default: 
-			this.setState( { popout:
-				<ActionSheet onClose={ () => this.setState( { popout: null } ) } title="Ошибка" text="Неизвестный источник вызова">
-					{ osname === IOS && <ActionSheetItem autoclose theme="cancel">Отмена</ActionSheetItem> }
-				</ActionSheet>
-			} );
-			break;
+				break;
+			case 'sell_home':
+				this.setState( { popout:
+					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+						<h2>Продажа недвижимости</h2>
+						<p>Вы действительно хотите продать выбранную недвижимость?</p>
+					</Alert>
+				} );
+				break;
+			default: 
+				this.setState( { popout:
+					<ActionSheet onClose={ () => this.setState( { popout: null } ) } title="Ошибка" text="Неизвестный источник вызова">
+						{ osname === IOS && <ActionSheetItem autoclose theme="cancel">Отмена</ActionSheetItem> }
+					</ActionSheet>
+				} );
+				break;
 		}
 	}
 
@@ -202,7 +212,9 @@ class App extends React.Component {
 					<Setting 	id="setting" 	state={this.state} go={this.go} decnum={this.decnum} />
 					<Money 		id="money" 		state={this.state} go={this.go} decnum={this.decnum} money={this.money} />
 					<Home 		id="home" 		state={this.state} go={this.go} decnum={this.decnum} />
-					<HomeFrame	id="homeframe"	state={this.state} go={this.go} decnum={this.decnum} />
+					<HomeFrame	id="homeframe"	state={this.state} go={this.go} decnum={this.decnum} openSheet={this.openSheet} />
+					<Job 		id="job" 		state={this.state} go={this.go} decnum={this.decnum} />
+					<JobFrame	id="jobframe"	state={this.state} go={this.go} decnum={this.decnum} openSheet={this.openSheet} />
 					<GameKN		id="kn"			state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} icons={this.icons} kn={this.kn} openSheet={this.openSheet} />
 					<About		id="about" 		state={this.state} go={this.go} decnum={this.decnum} />
 				</View>

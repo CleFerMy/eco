@@ -10,7 +10,7 @@ const Main = props => (
 		{ Object.keys( props.state.money ).length > 0 ? (
 			<div>
 				{ props.state.menuhide && 
-					<Group> 
+					<Group className="notif"> 
 						<List>
 							<Cell asideContent={ props.icons( `cancel` ) }>Раздел временно недоступен</Cell>
 						</List>
@@ -22,7 +22,7 @@ const Main = props => (
 							<div onClick={ props.go } data-to="home" className="statsitem stats_home"><span className="statsspan">Дом</span><div className="statsitemdesc">Только макет</div></div>
 							<div onClick={ props.go } data-to="time" className="statsitem stats_bank"><span className="statsspan">Банк</span><div className="statsitemdesc">В разработке</div></div>
 							<div onClick={ props.go } data-to="time" className="statsitem stats_shop"><span className="statsspan">Магазин</span><div className="statsitemdesc">В разработке</div></div>
-							<div onClick={ props.go } data-to="time" className="statsitem stats_job"><span className="statsspan">Работа</span><div className="statsitemdesc">В разработке</div></div>
+							<div onClick={ props.go } data-to="job" className="statsitem stats_job"><span className="statsspan">Работа</span><div className="statsitemdesc">Только макет</div></div>
 							<div onClick={  ( e ) => { props.go( e ); props.apiupdate( e ); } } data-type="kn" data-to="kn" className="statsitem stats_game"><span className="statsspan">Игра</span><div className="statsitemdesc">Крестики-нолики</div></div>
 						</div>
 					</HorizontalScroll>
