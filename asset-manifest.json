@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.c1f38b5b.css",
-  "main.css.map": "static/css/main.c1f38b5b.css.map",
-  "main.js": "static/js/main.5cb0eec7.js",
-  "main.js.map": "static/js/main.5cb0eec7.js.map",
+  "main.css": "static/css/main.efc005c3.css",
+  "main.css.map": "static/css/main.efc005c3.css.map",
+  "main.js": "static/js/main.94a158fd.js",
+  "main.js.map": "static/js/main.94a158fd.js.map",
   "static\\media\\bank.svg": "static/media/bank.b1ee7ffe.svg",
   "static\\media\\circle.svg": "static/media/circle.5d64416f.svg",
   "static\\media\\cross.svg": "static/media/cross.ca3cb1e8.svg",
@@ -12,5 +12,6 @@
   "static\\media\\job.svg": "static/media/job.66bb2d01.svg",
   "static\\media\\left.svg": "static/media/left.1d352a15.svg",
   "static\\media\\right.svg": "static/media/right.64a9e5ff.svg",
+  "static\\media\\s.png": "static/media/s.0955caab.png",
   "static\\media\\shop.svg": "static/media/shop.ba249130.svg"
 }
