@@ -34,7 +34,7 @@ class App extends React.Component {
 			user: 		null,					//Информация о профиле
 			popout:		null,					//Всплывающие объекты
 			menuhide:	false,					//Скрытие уведомления про меню
-			version:	'Beta 1.0, build 6',	//Версия сервиса
+			version:	'Beta 1.0, build 7',	//Версия сервиса
 			contacts:	{},
 		};
 		this.money 		= this.money.bind(this);
@@ -191,6 +191,14 @@ class App extends React.Component {
 					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа недвижимости</h2>
 						<p>Вы действительно хотите продать выбранную недвижимость?</p>
+					</Alert>
+				} );
+				break;
+			case 'sell_job':
+				this.setState( { popout:
+					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа предприятия` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+						<h2>Продажа предприятия</h2>
+						<p>Вы действительно хотите продать выбранное предприятие?</p>
 					</Alert>
 				} );
 				break;
