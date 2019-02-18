@@ -7,9 +7,9 @@ const Main = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } >Eco</PanelHeader>
 		<div className="hleft"></div><div className="hright"></div>
-		{ Object.keys( props.state.money ).length > 0 ? (
+		{ props.state.load ? (
 			<div>
-				{ props.state.menuhide && 
+				{ props.state.notifhide && 
 					<Group className="notif"> 
 						<List>
 							<Cell asideContent={ props.icons( `cancel` ) }>Раздел временно недоступен</Cell>
@@ -19,10 +19,10 @@ const Main = props => (
 				<div className="menu">
 					<HorizontalScroll className="menuscroll">
 						<div className="statslist">
-							<div onClick={ props.go } data-to="home" className="statsitem stats_home"><span className="statsspan">Дом</span><div className="statsitemdesc">Только макет</div></div>
-							<div onClick={ props.go } data-to="time" className="statsitem stats_bank"><span className="statsspan">Банк</span><div className="statsitemdesc">В разработке</div></div>
-							<div onClick={ props.go } data-to="time" className="statsitem stats_shop"><span className="statsspan">Магазин</span><div className="statsitemdesc">В разработке</div></div>
-							<div onClick={ props.go } data-to="job" className="statsitem stats_job"><span className="statsspan">Работа</span><div className="statsitemdesc">Только макет</div></div>
+							<div onClick={ props.go } data-to="home" className="statsitem stats_home"><span className="statsspan">Дом</span><div className="statsitemdesc">{ props.state.menu[0] ? ( props.state.menu[0] ) : ( `Неизвестно` ) }</div></div>
+							<div onClick={ props.go } data-to="time" className="statsitem stats_bank"><span className="statsspan">Банк</span><div className="statsitemdesc">{ props.state.menu[1] ? ( props.state.menu[1] ) : ( `Неизвестно` ) }</div></div>
+							<div onClick={ props.go } data-to="time" className="statsitem stats_shop"><span className="statsspan">Магазин</span><div className="statsitemdesc">{ props.state.menu[2] ? ( props.state.menu[2] ) : ( `Неизвестно` ) }</div></div>
+							<div onClick={ props.go } data-to="job" className="statsitem stats_job"><span className="statsspan">Работа</span><div className="statsitemdesc">{ props.state.menu[3] ? ( props.state.menu[3] ) : ( `Неизвестно` ) }</div></div>
 							<div onClick={  ( e ) => { props.go( e ); props.apiupdate( e ); } } data-type="kn" data-to="kn" className="statsitem stats_game"><span className="statsspan">Игра</span><div className="statsitemdesc">Крестики-нолики</div></div>
 						</div>
 					</HorizontalScroll>

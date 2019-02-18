@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Div, Button } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Div, Button, Spinner, Footer } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
@@ -17,35 +17,44 @@ const Home = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Дом</PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
-        <div className='balance'>
-            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
-        </div>
-        <Div style={ { 'marginTop': 50 } }>
-            <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
-        </Div>
-        <Group title="Дома">
-            <List>
-                <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Home /></Avatar>} description="ул. Крылова, д.1" >Основное жильё</Cell>
-            </List>
-        </Group>
-        <Group title="Земельные участки">
-            <List>
-                <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Place /></Avatar>} description="Элитный район, участок №1" >Дача</Cell>
-            </List>
-        </Group>
-        <Group title="Автомобили">
-            <List>
-                <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Flash /></Avatar>} description="LADA (ВАЗ) 2112" >Основной автомобиль</Cell>
-            </List>
-        </Group>
-        <Group title="Семья">
-            <List>
-                <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon16Users /></Avatar>} description="Внебрачный дедушка" >Имя Фамилия</Cell>
-            </List>
-        </Group>
-		<div className='setting'>
-			<div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
-		</div>
+        { props.state.load ? (
+			<div>
+                <div className='balance'>
+                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+                </div>
+                <Div>
+                    <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
+                </Div>
+                <Group title="Дома">
+                    <List>
+                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Home /></Avatar>} description="ул. Крылова, д.1" >Основное жильё</Cell>
+                    </List>
+                </Group>
+                <Group title="Земельные участки">
+                    <List>
+                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Place /></Avatar>} description="Элитный район, участок №1" >Дача</Cell>
+                    </List>
+                </Group>
+                <Group title="Автомобили">
+                    <List>
+                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Flash /></Avatar>} description="LADA (ВАЗ) 2112" >Основной автомобиль</Cell>
+                    </List>
+                </Group>
+                <Group title="Семья">
+                    <List>
+                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon16Users /></Avatar>} description="Внебрачный дедушка" >Имя Фамилия</Cell>
+                    </List>
+                </Group>
+                <div className='setting'>
+                    <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
+                </div>
+            </div>
+		) : (
+			<div>
+				<Spinner size="large" style={{ marginTop: 25 }} />
+				<Footer>Загрузка...</Footer>
+			</div>
+		) }
 	</Panel>
 );
 

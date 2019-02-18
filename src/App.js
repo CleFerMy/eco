@@ -6,6 +6,7 @@ import './style/style.css';
 
 import Icon24Report from '@vkontakte/icons/dist/24/report';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
+import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
 import CircleBot from './img/circle.svg';
 import CrossBot from './img/cross.svg';
 
@@ -26,71 +27,118 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			panel: 		'main',					//Активная панель
-			money: 		{},						//Деньги
-			kn: 		{},						//Крестики-нолики
-			kndisabled: false,					//Кнопки в крестиках-ноликах
-			sizekn:		24,						//Размер поля
-			user: 		null,					//Информация о профиле
+			/* Глобальное */
+			load:		false,					//Статус загрузки
 			popout:		null,					//Всплывающие объекты
-			menuhide:	false,					//Скрытие уведомления про меню
-			version:	'Beta 1.0, build 7',	//Версия сервиса
-			contacts:	{},
+			user: 		null,					//Профиль VK
+			notifhide:	false,					//Статус уведомления
+			panel: 		'main',					//Активный раздел
+
+			/* Игровое глобальное */
+			money: 		{},						//Деньги
+
+			/* Крестики-нолики */
+			kn: 		{},						//Информация о игре
+			kndisabled: false,					//Статус кнопок
+			sizekn:		24,						//Размер игрового поля
+
+			/* Раздел Money */
+			bankmoney:	{},						//Счета в банке
+
+			/* Раздел Home */
+			homelist:	{},						//Список домов
+
+			/* Раздел About */
+			version:	'Beta 1.0, build 8',	//Версия сервиса
+			contacts:	{},						//Список партнёров
+
+			/* Раздел Setting */
+			//Пусто
 		};
-		this.money 		= this.money.bind(this);
-		this.apiupdate 	= this.apiupdate.bind(this);
-		this.kn 		= this.kn.bind(this);
-		this.openSheet 	= this.openSheet.bind(this);
-		this.wcancel	= this.wcancel.bind(this);
+		this.apiupdate 	= this.apiupdate.bind(this);	//API
+		this.kn 		= this.kn.bind(this);			//API К-Н
+		this.openSheet 	= this.openSheet.bind(this);	//Всплывающие объекты
+		this.wc	= this.wc.bind(this);					//Статус уведомления
 	}
 	
-	go = (e) => { //Смена Panel
-		if ( e.currentTarget.dataset.to === 'time' ) {
-			this.setState( { menuhide:true } );
-			return;
+	//Переход на другой раздел
+	go = (e) => {
+		switch ( e.currentTarget.dataset.to ) {
+			//Закрытый раздел
+			case 'time':
+				this.setState( { notifhide:true } );
+				return;
+			case 'about':
+				if ( !this.state.contacts.length ) {
+					this.api( "setting", "1", "{}");
+				}
+				break;
+			default:	break;
 		}
-		this.setState({ panel: e.currentTarget.dataset.to });
+		//Меняем раздел
+		this.setState({ panel: e.currentTarget.dataset.to, notifhide:false });
+		
+		//Записываем в историю
 		window.history.pushState( { panel: e.currentTarget.dataset.to }, `${e.currentTarget.dataset.to}` );
 	};
 
 	//Склонение числительных
-	decnum (a,b) { let cases=[2,0,1,1,1,2];return b[(a%100>4 && a%100<20)?2:cases[(a%10<5)?a%10:5]]; }
+	dn (a,b) { let c=[2,0,1,1,1,2];return b[(a%100>4 && a%100<20)?2:c[(a%10<5)?a%10:5]]; }
+	//Скрытие уведомления
+	wc = ( e ) => { this.setState( { notifhide:false } ); }
 
 	//Переход по старым панелям
 	async Pop ( e ) {
 		if(e.state) {
-			let panel = e.state.panel;
-			await this.setState( { panel: panel } );
+			await this.setState( { panel: e.state.panel, panels: false } );
 		} else {
 			await this.setState( { panel: 'main' } );
-			window.history.pushState( { panel: 'main' }, `main` );
+			await window.history.pushState( { panel: 'main' }, `main` );
 		}
 	}
 
-	//Стартовая функция
-	async start () {
-		await window.history.pushState( { panel: 'main' }, `main` );
-		let res 	= await fetch( `https://clefer.ru/eco/main.php?`+ window.location.search.replace( '?', '') );
+	//API
+	async api ( section, method, params ) {
+		await this.setState( { load:false } );
+		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
 		if ( data.response ) {
-			let money 		= ( data.response.money ) ? data.response.money : {};
-			let contacts 	= ( data.response.contacts ) ? data.response.contacts : {};;
-			await this.setState( {
-				money:		money,
-				contacts:	contacts,
-			} );
-		} else if ( data.error ) {
-			console.log( data.error );
-		} else {
-			console.log( 'Ошибка соединения.' );
-		}
-	}
-
-	//Денежки
-	async money ( method, params ) {
-		let res 	= await fetch( `https://clefer.ru/eco/main.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
-		let data 	= await res.json();
-		if ( data.response ) {
+			switch ( section ) {
+				case 'main':
+					switch ( data.response.type ) {
+						case '0':
+							let menu 		= ( data.response.menu ) ? data.response.menu : {};
+							let money 		= ( data.response.money ) ? data.response.money : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								load:		true,
+							} );
+							break;
+						default:	break;
+					}
+					break;
+				case 'setting':
+					switch ( data.response.type ) {
+						case '1':
+							let contacts 	= ( data.response.contacts ) ? data.response.contacts : {};
+							await this.setState( {
+								contacts:	contacts,
+								load:		true,
+							} );
+							break;
+						default:	break;
+					}
+					break;
+				case 'home':
+					let homelist = ( data.response.homelist ) ? data.response.homelist : {};
+					await this.setState( {
+						homelist:	homelist,
+						load:		true,
+					} );
+					break;
+				default:	break;
+			}
 			let money = ( data.response.money ) ? data.response.money : {};
 			await this.setState( {
 				money:	money,
@@ -151,8 +199,9 @@ class App extends React.Component {
 		connect.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
+					window.history.pushState( { panel: 'main' }, `main` );
 					this.setState({ user: e.detail.data });
-					this.start();
+					this.api( 'main', '0', '{}');
 					break;
 				default:
 			}
@@ -160,17 +209,15 @@ class App extends React.Component {
 		connect.send('VKWebAppGetUserInfo', {});
 	}
 
-	wcancel = ( e ) => {
-		this.setState( { menuhide:false } );
-	}
-
 	//Готовые иконки
 	icons ( name ) {
 		switch ( name ) {
+			case 'bankmoney':		return <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
+			case 'bankmoneyempty':	return <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
 			case 'n': 	case 's':	return <Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></Avatar>;
 			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
 			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
-			case 'cancel':			return <div onClick={ () => this.wcancel() }><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></Avatar></div>;
+			case 'cancel':			return <div onClick={ () => this.wc() }><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></Avatar></div>;
 			default: 				return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
 		}
 	};
@@ -216,15 +263,15 @@ class App extends React.Component {
 		return (
 			<Epic activeStory="home" tabbar={false}>
 				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
-					<Main 		id="main" 		state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} icons={this.icons} wcancel={this.wcancel} />
-					<Setting 	id="setting" 	state={this.state} go={this.go} decnum={this.decnum} />
-					<Money 		id="money" 		state={this.state} go={this.go} decnum={this.decnum} money={this.money} />
-					<Home 		id="home" 		state={this.state} go={this.go} decnum={this.decnum} />
-					<HomeFrame	id="homeframe"	state={this.state} go={this.go} decnum={this.decnum} openSheet={this.openSheet} />
-					<Job 		id="job" 		state={this.state} go={this.go} decnum={this.decnum} />
-					<JobFrame	id="jobframe"	state={this.state} go={this.go} decnum={this.decnum} openSheet={this.openSheet} />
-					<GameKN		id="kn"			state={this.state} go={this.go} decnum={this.decnum} apiupdate={this.apiupdate} icons={this.icons} kn={this.kn} openSheet={this.openSheet} />
-					<About		id="about" 		state={this.state} go={this.go} decnum={this.decnum} />
+					<Main 		id="main" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
+					<Setting 	id="setting" 	state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
+					<Money 		id="money" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
+					<Home 		id="home" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
+					<HomeFrame	id="homeframe"	state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} />
+					<Job 		id="job" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
+					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} />
+					<GameKN		id="kn"			state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
+					<About		id="about" 		state={this.state} go={this.go} dn={this.dn} />
 				</View>
 			</Epic>
 		);
