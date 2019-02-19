@@ -49,7 +49,7 @@ class App extends React.Component {
 			homelist:	{},						//Список домов
 
 			/* Раздел About */
-			version:	'Beta 1.0, build 8',	//Версия сервиса
+			version:	'Beta 1.0, build 9',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
