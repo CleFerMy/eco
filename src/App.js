@@ -7,6 +7,7 @@ import './style/style.css';
 import Icon24Report from '@vkontakte/icons/dist/24/report';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
+import Icon24Error from '@vkontakte/icons/dist/24/error';
 import CircleBot from './img/circle.svg';
 import CrossBot from './img/cross.svg';
 
@@ -17,6 +18,7 @@ import Home from './panels/Home';
 import HomeFrame from './panels/HomeFrame';
 import Job from './panels/Job';
 import JobFrame from './panels/JobFrame';
+import JobList from './panels/JobList';
 import GameKN from './panels/GameKN';
 import About from './panels/About';
 
@@ -46,10 +48,21 @@ class App extends React.Component {
 			bankmoney:	{},						//Счета в банке
 
 			/* Раздел Home */
+			family:		{},						//Семья
 			homelist:	{},						//Список домов
+			regionlist:	{},						//Список земельных участков
+			autolist:	{},						//Список автомобилей
+			homebuy:	{},						//Список домов
+			regionbuy:	{},						//Список земельных участков
+			autobuy:	{},						//Список автомобилей
+
+			/* Раздел Job */
+			joblist:	{},						//Список предприятий
+			jobbuy:		{},						//Список предприятий для покупки
+			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.0, build 9',	//Версия сервиса
+			version:	'Beta 1.1, build 10',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -58,7 +71,8 @@ class App extends React.Component {
 		this.apiupdate 	= this.apiupdate.bind(this);	//API
 		this.kn 		= this.kn.bind(this);			//API К-Н
 		this.openSheet 	= this.openSheet.bind(this);	//Всплывающие объекты
-		this.wc	= this.wc.bind(this);					//Статус уведомления
+		this.wc			= this.wc.bind(this);			//Статус уведомления
+		this.jf			= this.jf.bind(this);			//Просмотр предприятия
 	}
 	
 	//Переход на другой раздел
@@ -68,11 +82,9 @@ class App extends React.Component {
 			case 'time':
 				this.setState( { notifhide:true } );
 				return;
-			case 'about':
-				if ( !this.state.contacts.length ) {
-					this.api( "setting", "1", "{}");
-				}
-				break;
+			case 'about': if ( !Object.keys(this.state.contacts).length ) { this.api( "setting", "1", "{}"); } break;
+			case 'job': if ( !Object.keys(this.state.joblist).length ) { this.api( "job", "1", "{}"); } break;
+			case 'joblist': if ( !Object.keys(this.state.jobbuy).length ) { this.api( "job", "2", "{}"); } break;
 			default:	break;
 		}
 		//Меняем раздел
@@ -86,6 +98,10 @@ class App extends React.Component {
 	dn (a,b) { let c=[2,0,1,1,1,2];return b[(a%100>4 && a%100<20)?2:c[(a%10<5)?a%10:5]]; }
 	//Скрытие уведомления
 	wc = ( e ) => { this.setState( { notifhide:false } ); }
+	//Деление нулями
+	nl (n) { return n.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '); }
+	//Просмотр предприятия
+	jf ( e ) { this.setState( { joblast:e } ); }
 
 	//Переход по старым панелям
 	async Pop ( e ) {
@@ -121,8 +137,12 @@ class App extends React.Component {
 				case 'setting':
 					switch ( data.response.type ) {
 						case '1':
+							let menu 		= ( data.response.menu ) ? data.response.menu : {};
+							let money 		= ( data.response.money ) ? data.response.money : {};
 							let contacts 	= ( data.response.contacts ) ? data.response.contacts : {};
 							await this.setState( {
+								menu:		menu,
+								money:		money,
 								contacts:	contacts,
 								load:		true,
 							} );
@@ -131,11 +151,58 @@ class App extends React.Component {
 					}
 					break;
 				case 'home':
-					let homelist = ( data.response.homelist ) ? data.response.homelist : {};
-					await this.setState( {
-						homelist:	homelist,
-						load:		true,
-					} );
+					switch ( data.response.type ) {
+						case '1':
+							let menu 		= ( data.response.menu ) ? data.response.menu : {};
+							let money 		= ( data.response.money ) ? data.response.money : {};
+							let homelist = ( data.response.homelist ) ? data.response.homelist : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								homelist:	homelist,
+								load:		true,
+							} );
+							break;
+						case '2':
+							menu 	= ( data.response.menu ) ? data.response.menu : {};
+							money 		= ( data.response.money ) ? data.response.money : {};
+							let homebuy = ( data.response.homebuy ) ? data.response.homebuy : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								homebuy:	homebuy,
+								load:		true,
+							} );
+							break;
+						default:	break;
+					}
+					break;
+				case 'job':
+					switch ( data.response.type ) {
+						case '1':
+							let menu 		= ( data.response.menu ) ? data.response.menu : {};
+							let money 		= ( data.response.money ) ? data.response.money : {};
+							let joblist = ( data.response.joblist ) ? data.response.joblist : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								joblist:	joblist,
+								load:		true,
+							} );
+							break;
+						case '2':
+							menu 		= ( data.response.menu ) ? data.response.menu : {};
+							money 		= ( data.response.money ) ? data.response.money : {};
+							let jobbuy = ( data.response.jobbuy ) ? data.response.jobbuy : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								jobbuy:		jobbuy,
+								load:		true,
+							} );
+							break;
+						default:	break;
+					}
 					break;
 				default:	break;
 			}
@@ -214,6 +281,7 @@ class App extends React.Component {
 		switch ( name ) {
 			case 'bankmoney':		return <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
 			case 'bankmoneyempty':	return <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
+			case 'empty':			return <Avatar style={ { background: '#FFA000' } } size={48}><Icon24Error fill="var(--white)" /></Avatar>;
 			case 'n': 	case 's':	return <Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></Avatar>;
 			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
 			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
@@ -263,14 +331,15 @@ class App extends React.Component {
 		return (
 			<Epic activeStory="home" tabbar={false}>
 				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
-					<Main 		id="main" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
-					<Setting 	id="setting" 	state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
-					<Money 		id="money" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
-					<Home 		id="home" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
-					<HomeFrame	id="homeframe"	state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} />
-					<Job 		id="job" 		state={this.state} go={this.go} dn={this.dn} icons={this.icons} />
-					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} />
-					<GameKN		id="kn"			state={this.state} go={this.go} dn={this.dn} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
+					<Main 		id="main" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
+					<Setting 	id="setting" 	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<Money 		id="money" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<Home 		id="home" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<HomeFrame	id="homeframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
+					<Job 		id="job" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} jf={this.jf} />
+					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
+					<JobList	id="joblist"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} jf={this.jf} />
+					<GameKN		id="kn"			state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
 					<About		id="about" 		state={this.state} go={this.go} dn={this.dn} />
 				</View>
 			</Epic>

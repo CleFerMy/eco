@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, HeaderButton, platform, IOS, Group, Footer, Button, Div, Avatar, FormStatus, Spinner } from '@vkontakte/vkui';
+import { Panel, PanelHeader, HeaderButton, platform, IOS, Group, Footer, Button, Div, Avatar, List, Cell, Spinner } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
@@ -23,10 +23,14 @@ const KN = props => (
                     <div>
                         { props.state.kn.p ? (
                             <div>
+                                <Group className="notif"> 
+                                    <List>
+                                        { props.state.kn.win === 's' && <Cell style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } >Ваш ход. Ставка: 10 очков.</Cell> }
+                                        { props.state.kn.win !== 's' && <Cell style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } >Вы { win[props.state.kn.win] }</Cell> }
+                                    </List>
+                                </Group>
                                 <Group>
                                     <Div>
-                                        { props.state.kn.win === 's' && <FormStatus style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } title={`Ваш ход. Ставка: 10 очков.`}></FormStatus> }
-                                        { props.state.kn.win !== 's' && <FormStatus style={ { 'marginBottom': 25, 'color': 'var(--button_secondary_foreground)' } } title={`Вы ${ win[props.state.kn.win] }`}></FormStatus> }
                                         <div className="kn" style={ { display: 'flex' } }>
                                             <Button disabled={ props.state.kndisabled || props.state.kn.p[1] !== 'n' || props.state.kn.win !== 's' } onClick={ ( e ) => props.kn( e ) } data-m="3" data-p="{h:1}" size="m" level="secondary" style={{ marginLeft: 4, background: props.state.kn.wins[1] === 'y' && `#8ac176` }}>{ props.icons( props.state.kn.p[1] ) }</Button>
                                             <Button disabled={ props.state.kndisabled || props.state.kn.p[2] !== 'n' || props.state.kn.win !== 's' } onClick={ ( e ) => props.kn( e ) } data-m="3" data-p="{h:2}" size="m" level="secondary" style={{ marginLeft: 4, background: props.state.kn.wins[2] === 'y' && `#8ac176` }}>{ props.icons( props.state.kn.p[2] ) }</Button>

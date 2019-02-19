@@ -10,7 +10,9 @@ import Icon24Home from '@vkontakte/icons/dist/24/home';
 
 const osname = platform();
 
-const Job = props => (
+const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
+
+const JobList = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Работа</PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
@@ -19,17 +21,14 @@ const Job = props => (
                 <div className='balance'>
                     <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                 </div>
-                <Div>
-                    <Button onClick={ props.go } data-to="joblist" before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
-                </Div>
                 <Group title="Предприятия">
-                    { Object.keys(props.state.joblist).length > 0 ? (
+                    { Object.keys(props.state.jobbuy).length > 0 ? (
                         <List>
-                            { props.state.joblist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="jobframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                            { props.state.jobbuy.map( (list, i) => <Cell key={i} onClick={ (e) => {props.go(e), props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Стоимость: ` + props.nl( list.money ) + props.dn( list.money, moneyname['1'] ) + `. Прибыль: ` + props.nl( list.des ) + props.dn( list.des, moneyname[list.coin] ) + ` в час` }>{ list.name }</Cell> ) }
                         </List>
                     ) : (
                         <List>
-                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного предприятия</Cell>
+                            <Cell multiline={true} before={ props.icons( 'empty' ) } >Нет доступных для покупки предприятий</Cell>
                         </List>
                     ) }
                 </Group>
@@ -46,4 +45,4 @@ const Job = props => (
 	</Panel>
 );
 
-export default Job;
+export default JobList;

@@ -12,6 +12,8 @@ import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
 
 const osname = platform();
 
+const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
+
 const JobFrame = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Информация</PanelHeader>
@@ -19,16 +21,24 @@ const JobFrame = props => (
         { props.state.load ? (
 			<div>
                 <div className='balance'>
-                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                 </div>
-                <Div className="homeframeimg" ><img className="notifimage" src={ Job } alt="картиночка" /></Div>
-                <Group title="Подробно">
-                    <List>
-                        <Cell onClick={ props.openSheet } data-notifs="sell_job" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description="2 000 000 ридия" multiline>Продать</Cell>
-                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon28Favorite /></Avatar> } description="2 уровень" multiline>Уровень</Cell>
-                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description="10 000 ридия в час" multiline>Прибыль</Cell>
-                    </List>
-                </Group>
+                { Object.keys(props.state.joblast).length > 0 ? (
+                    <div>
+                        <Div className="homeframeimg" ><img className="notifimage" src={ Job } alt="картиночка" /></Div>
+                        <Group title="Подробно">
+                            <List>
+                                <Cell onClick={ props.openSheet } data-notifs="sell_job" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Продать</Cell>
+                                <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</Cell>
+                            </List>
+                        </Group>
+                    </div>
+                ) : (
+                    <div>
+                        <Spinner size="large" style={{ marginTop: 25 }} />
+                        <Footer>Нет истории просмотров...</Footer>
+                    </div>
+                ) }
                 <div className='setting'>
                     <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
                 </div>

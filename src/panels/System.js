@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, PanelHeader } from '@vkontakte/vkui';
 
-const Main = props => (
+const System = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } >Eco</PanelHeader>
 		<div className="hleft"></div><div className="hright"></div>
@@ -11,4 +11,4 @@ const Main = props => (
 	</Panel>
 );
 
-export default Main;
+export default System;

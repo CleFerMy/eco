@@ -20,30 +20,54 @@ const Home = props => (
         { props.state.load ? (
 			<div>
                 <div className='balance'>
-                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                 </div>
                 <Div>
                     <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
                 </Div>
                 <Group title="Дома">
-                    <List>
-                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Home /></Avatar>} description="ул. Крылова, д.1" >Основное жильё</Cell>
-                    </List>
+                    { Object.keys(props.state.homelist).length > 0 ? (
+                        <List>
+                            { props.state.homelist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ 'Дом №' + list.id }</Cell> ) }
+                        </List>
+                    ) : (
+                        <List>
+                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного дома</Cell>
+                        </List>
+                    ) }
                 </Group>
-                <Group title="Земельные участки">
-                    <List>
-                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Place /></Avatar>} description="Элитный район, участок №1" >Дача</Cell>
-                    </List>
+                <Group title="Земельные участки" description="Недоступно" >
+                    { Object.keys(props.state.regionlist).length > 0 ? (
+                        <List>
+                            { props.state.regionlist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Place /></Avatar> } description={ list.des }>{ 'Участок №' + list.id }</Cell> ) }
+                        </List>
+                    ) : (
+                        <List>
+                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного земельного участка</Cell>
+                        </List>
+                    ) }
                 </Group>
-                <Group title="Автомобили">
-                    <List>
-                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24Flash /></Avatar>} description="LADA (ВАЗ) 2112" >Основной автомобиль</Cell>
-                    </List>
+                <Group title="Автомобили" description="Недоступно" >
+                    { Object.keys(props.state.autolist).length > 0 ? (
+                        <List>
+                            { props.state.autolist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Flash /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                        </List>
+                    ) : (
+                        <List>
+                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного автомобиля</Cell>
+                        </List>
+                    ) }
                 </Group>
-                <Group title="Семья">
-                    <List>
-                        <Cell onClick={ props.go } data-to="homeframe" expandable multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon16Users /></Avatar>} description="Внебрачный дедушка" >Имя Фамилия</Cell>
-                    </List>
+                <Group title="Семья" description="Недоступно" >
+                    { Object.keys(props.state.family).length > 0 ? (
+                        <List>
+                            { props.state.family.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon16Users /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                        </List>
+                    ) : (
+                        <List>
+                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного участника семьи</Cell>
+                        </List>
+                    ) }
                 </Group>
                 <div className='setting'>
                     <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>

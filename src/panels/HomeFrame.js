@@ -20,7 +20,7 @@ const HomeFrame = props => (
         { props.state.load ? (
 			<div>
                 <div className='balance'>
-                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                 </div>
                 <Div className="homeframeimg" ><img className="notifimage" src={ Home } alt="картиночка" /></Div>
                 <Group title="Подробно">
