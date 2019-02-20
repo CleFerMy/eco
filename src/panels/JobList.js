@@ -1,11 +1,10 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Div, Button, Spinner, Footer } from '@vkontakte/vkui';
+import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Button, Spinner, Footer } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
-import Icon28AddOutline from '@vkontakte/icons/dist/28/add_outline';
 import Icon24Home from '@vkontakte/icons/dist/24/home';
 
 const osname = platform();
@@ -24,7 +23,7 @@ const JobList = props => (
                 <Group title="Предприятия">
                     { Object.keys(props.state.jobbuy).length > 0 ? (
                         <List>
-                            { props.state.jobbuy.map( (list, i) => <Cell key={i} onClick={ (e) => {props.go(e), props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Стоимость: ` + props.nl( list.money ) + props.dn( list.money, moneyname['1'] ) + `. Прибыль: ` + props.nl( list.des ) + props.dn( list.des, moneyname[list.coin] ) + ` в час` }>{ list.name }</Cell> ) }
+                            { props.state.jobbuy.map( (list, i) => <Cell key={i} onClick={ (e) => {props.go(e); props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Стоимость: ` + props.nl( list.money ) + props.dn( list.money, moneyname['1'] ) }>{ list.name }</Cell> ) }
                         </List>
                     ) : (
                         <List>

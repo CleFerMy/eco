@@ -24,6 +24,8 @@ import About from './panels/About';
 
 const osname = platform();
 
+const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -62,7 +64,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 10',	//Версия сервиса
+			version:	'Beta 1.1, build 11',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -309,6 +311,14 @@ class App extends React.Component {
 					</Alert>
 				} );
 				break;
+			case 'buy_job':
+				this.setState( { popout:
+					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Покупка предприятия` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+						<h2>Покупка предприятия</h2>
+						<p>Вы действительно хотите купить новое предприятие за { this.nl(this.state.joblast.money) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
+					</Alert>
+				} );
+				break;
 			case 'sell_job':
 				this.setState( { popout:
 					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа предприятия` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
@@ -337,8 +347,8 @@ class App extends React.Component {
 					<Home 		id="home" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
 					<HomeFrame	id="homeframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
 					<Job 		id="job" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} jf={this.jf} />
-					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
 					<JobList	id="joblist"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} jf={this.jf} />
+					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
 					<GameKN		id="kn"			state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
 					<About		id="about" 		state={this.state} go={this.go} dn={this.dn} />
 				</View>

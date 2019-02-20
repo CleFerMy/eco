@@ -8,7 +8,7 @@ import Job from '../img/job.png';
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
-import Icon28Favorite from '@vkontakte/icons/dist/28/favorite';
+import Icon24Mention from '@vkontakte/icons/dist/24/mention';
 
 const osname = platform();
 
@@ -28,7 +28,8 @@ const JobFrame = props => (
                         <Div className="homeframeimg" ><img className="notifimage" src={ Job } alt="картиночка" /></Div>
                         <Group title="Подробно">
                             <List>
-                                <Cell onClick={ props.openSheet } data-notifs="sell_job" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Продать</Cell>
+                                <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Mention /></Avatar> } description={ props.state.joblast.name } multiline>Наимнование</Cell>
+                                <Cell onClick={ props.openSheet } data-notifs="buy_job" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</Cell>
                             </List>
                         </Group>

@@ -24,7 +24,7 @@ const About = props => (
                     <div>
                         <Group title="партнёры">
                             <List>
-                                { props.state.contacts.map( (list, i) => <Cell key={i} multiline={true} target="_blank" href={ `${list.url}` } before={ <Avatar src={ list.img }/> } description={ `Разработчик: ${list.author}` }>{ list.name }</Cell> ) }
+                                { props.state.contacts.map( (list, i) => <Cell key={i} multiline={true} target="_blank" href={ `${list.url}` } before={ <Avatar src={ list.img }/> } description={ list.author }>{ list.name }</Cell> ) }
                             </List>
                         </Group>
                     </div>
