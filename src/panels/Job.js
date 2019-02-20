@@ -10,6 +10,8 @@ import Icon24Home from '@vkontakte/icons/dist/24/home';
 
 const osname = platform();
 
+const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
+
 const Job = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Работа</PanelHeader>
@@ -25,7 +27,7 @@ const Job = props => (
                 <Group title="Предприятия">
                     { Object.keys(props.state.joblist).length > 0 ? (
                         <List>
-                            { props.state.joblist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="jobframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                            { props.state.joblist.map( (list, i) => <Cell key={i} onClick={ (e) => {props.go(e); props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Прибыль: ` + props.nl( list.des ) + props.dn( list.des, moneyname[ list.coin ] ) + ` в час` }>{ list.name }</Cell> ) }
                         </List>
                     ) : (
                         <List>

@@ -9,6 +9,7 @@ import Icon24Coins from '@vkontakte/icons/dist/24/coins';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
 import Icon24Mention from '@vkontakte/icons/dist/24/mention';
+import Icon24Users from '@vkontakte/icons/dist/24/users';
 
 const osname = platform();
 
@@ -29,8 +30,9 @@ const JobFrame = props => (
                         <Group title="Подробно">
                             <List>
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Mention /></Avatar> } description={ props.state.joblast.name } multiline>Наимнование</Cell>
-                                <Cell onClick={ props.openSheet } data-notifs="buy_job" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
+                                <Cell onClick={ props.openSheet } data-notifs="buy_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</Cell>
+                                <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Users /></Avatar> } description={ props.nl( props.state.joblast.user ) + props.dn( props.state.joblast.user, [' человек', ' человека', ' человек'] ) } multiline>Владельцы</Cell>
                             </List>
                         </Group>
                     </div>

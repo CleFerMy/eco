@@ -203,6 +203,19 @@ class App extends React.Component {
 								load:		true,
 							} );
 							break;
+						case '3':
+							menu 		= ( data.response.menu ) ? data.response.menu : {};
+							money 		= ( data.response.money ) ? data.response.money : {};
+							joblist = ( data.response.joblist ) ? data.response.joblist : {};
+							jobbuy = ( data.response.jobbuy ) ? data.response.jobbuy : {};
+							await this.setState( {
+								menu:		menu,
+								money:		money,
+								joblist:	joblist,
+								jobbuy:		jobbuy,
+								load:		true,
+							} );
+							break;
 						default:	break;
 					}
 					break;
@@ -270,7 +283,7 @@ class App extends React.Component {
 				case 'VKWebAppGetUserInfoResult':
 					window.history.pushState( { panel: 'main' }, `main` );
 					this.setState({ user: e.detail.data });
-					this.api( 'main', '0', '{}');
+					this.api( 'main', '0', {});
 					break;
 				default:
 			}
@@ -312,8 +325,9 @@ class App extends React.Component {
 				} );
 				break;
 			case 'buy_job':
+				let job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Покупка предприятия` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<Alert actions={ [ { title: 'Продолжить', action: () => this.api( 'job', '3', {'id':job} ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Покупка предприятия</h2>
 						<p>Вы действительно хотите купить новое предприятие за { this.nl(this.state.joblast.money) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
 					</Alert>
