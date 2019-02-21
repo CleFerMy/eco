@@ -37,6 +37,7 @@ class App extends React.Component {
 			user: 		null,					//Профиль VK
 			notifhide:	false,					//Статус уведомления
 			panel: 		'main',					//Активный раздел
+			fetching:	false,					//Пулл спиннер
 
 			/* Игровое глобальное */
 			money: 		{},						//Деньги
@@ -64,12 +65,13 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 12',	//Версия сервиса
+			version:	'Beta 1.1, build 13',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
 			//Пусто
 		};
+		this.apiq		= this.apiq.bind(this);			//API
 		this.apiupdate 	= this.apiupdate.bind(this);	//API
 		this.kn 		= this.kn.bind(this);			//API К-Н
 		this.openSheet 	= this.openSheet.bind(this);	//Всплывающие объекты
@@ -117,10 +119,11 @@ class App extends React.Component {
 
 	//API
 	async api ( section, method, params ) {
-		await this.setState( { load:false } );
+		if ( !this.state.fetching ) { await this.setState( { load: false } ); }
 		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
 		if ( data.response ) {
+			console.log(data.response);
 			switch ( section ) {
 				case 'main':
 					switch ( data.response.type ) {
@@ -131,6 +134,7 @@ class App extends React.Component {
 								menu:		menu,
 								money:		money,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						default:	break;
@@ -147,6 +151,7 @@ class App extends React.Component {
 								money:		money,
 								contacts:	contacts,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						default:	break;
@@ -163,6 +168,7 @@ class App extends React.Component {
 								money:		money,
 								homelist:	homelist,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						case '2':
@@ -174,6 +180,7 @@ class App extends React.Component {
 								money:		money,
 								homebuy:	homebuy,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						default:	break;
@@ -190,6 +197,7 @@ class App extends React.Component {
 								money:		money,
 								joblist:	joblist,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						case '2':
@@ -201,6 +209,7 @@ class App extends React.Component {
 								money:		money,
 								jobbuy:		jobbuy,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						case '3': case '4':
@@ -214,6 +223,7 @@ class App extends React.Component {
 								joblist:	joblist,
 								jobbuy:		jobbuy,
 								load:		true,
+								fetching:	false,
 							} );
 							break;
 						default:	break;
@@ -271,6 +281,20 @@ class App extends React.Component {
 	apiupdate = ( e ) => {
 		switch ( e.currentTarget.dataset.type ) {
 			case 'kn': 		this.apikn( '1', {} ); 		break;
+			default: 									break;	
+		}
+	}
+
+	//Обычное обновление
+	apiq = ( e ) => {
+		this.setState( { fetching:true } );
+		switch ( e ) {
+			case 'main0': 		this.api( 'main', '0', {} ); 		break;
+			case 'setting1': 	this.api( 'setting', '1', {} );		break;
+			case 'home1': 		this.api( 'home', '1', {} ); 		break;
+			case 'home2': 		this.api( 'home', '2', {} ); 		break;
+			case 'job1': 		this.api( 'job', '1', {} ); 		break;
+			case 'job2': 		this.api( 'job', '2', {} ); 		break;
 			default: 									break;	
 		}
 	}
@@ -356,16 +380,16 @@ class App extends React.Component {
 		return (
 			<Epic activeStory="home" tabbar={false}>
 				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
-					<Main 		id="main" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
-					<Setting 	id="setting" 	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<Money 		id="money" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<Home 		id="home" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<HomeFrame	id="homeframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
-					<Job 		id="job" 		state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} jf={this.jf} />
-					<JobList	id="joblist"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} jf={this.jf} />
-					<JobFrame	id="jobframe"	state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
-					<GameKN		id="kn"			state={this.state} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
-					<About		id="about" 		state={this.state} go={this.go} dn={this.dn} />
+					<Main 		id="main" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
+					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<Money 		id="money" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<Home 		id="home" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
+					<HomeFrame	id="homeframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
+					<Job 		id="job" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} jf={this.jf} />
+					<JobList	id="joblist"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} jf={this.jf} />
+					<JobFrame	id="jobframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
+					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
+					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} />
 				</View>
 			</Epic>
 		);
