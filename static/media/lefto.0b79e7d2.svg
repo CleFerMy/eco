@@ -5,6 +5,5 @@
 <style type="text/css">
 	.st0{fill:#5181B8;}
 </style>
-<path class="st0" d="M25,25C11.2,25,0,36.2,0,50V25H25z"/>
-<rect class="st0" width="50" height="25"/>
+<path class="st0" d="M25,0C11.2,0,0,11.2,0,25V0H25z"/>
 </svg>
