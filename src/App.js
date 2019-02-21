@@ -65,7 +65,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 13',	//Версия сервиса
+			version:	'Beta 1.1, build 14',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -217,6 +217,7 @@ class App extends React.Component {
 							money 		= ( data.response.money ) ? data.response.money : {};
 							joblist = ( data.response.joblist ) ? data.response.joblist : {};
 							jobbuy = ( data.response.jobbuy ) ? data.response.jobbuy : {};
+							window.history.back()
 							await this.setState( {
 								menu:		menu,
 								money:		money,
