@@ -170,9 +170,8 @@ html, body {
     position: fixed;
     height: 50px;
     width: 50px;
-    background-image: url(../img/left.svg);
+    background-image: url(../img/lefto.svg);
     z-index: 100;
-    margin-top: -25px;
 }
 
 .hright {
@@ -180,9 +179,8 @@ html, body {
     right: 0;
     height: 50px;
     width: 50px;
-    background-image: url(../img/right.svg);
+    background-image: url(../img/righto.svg);
     z-index: 100;
-    margin-top: -25px;
 }
 
 .Panel__in-before, .Panel__in-after {
