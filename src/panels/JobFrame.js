@@ -30,7 +30,11 @@ const JobFrame = props => (
                         <Group title="Подробно">
                             <List>
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Mention /></Avatar> } description={ props.state.joblast.name } multiline>Наимнование</Cell>
-                                <Cell onClick={ props.openSheet } data-notifs="buy_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
+                                { props.state.joblast.buy ? ( 
+                                    <Cell onClick={ props.openSheet } data-notifs="buy_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
+                                ) : ( 
+                                    <Cell onClick={ props.openSheet } data-notifs="sell_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money_sell ) + props.dn( props.state.joblast.money_sell, moneyname['1'] ) } multiline>Продать</Cell>
+                                ) }
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</Cell>
                                 <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Users /></Avatar> } description={ props.nl( props.state.joblast.user ) + props.dn( props.state.joblast.user, [' человек', ' человека', ' человек'] ) } multiline>Владельцы</Cell>
                             </List>

@@ -64,7 +64,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 11',	//Версия сервиса
+			version:	'Beta 1.1, build 12',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -203,7 +203,7 @@ class App extends React.Component {
 								load:		true,
 							} );
 							break;
-						case '3':
+						case '3': case '4':
 							menu 		= ( data.response.menu ) ? data.response.menu : {};
 							money 		= ( data.response.money ) ? data.response.money : {};
 							joblist = ( data.response.joblist ) ? data.response.joblist : {};
@@ -334,10 +334,11 @@ class App extends React.Component {
 				} );
 				break;
 			case 'sell_job':
+				job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа предприятия` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<Alert actions={ [ { title: 'Продолжить', action: () => this.api( 'job', '4', {'id':job} ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа предприятия</h2>
-						<p>Вы действительно хотите продать выбранное предприятие?</p>
+						<p>Вы действительно хотите продать выбранное предприятие за { this.nl(this.state.joblast.money_sell) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
 					</Alert>
 				} );
 				break;
