@@ -8,6 +8,7 @@ import Icon24Report from '@vkontakte/icons/dist/24/report';
 import Icon24Cancel from '@vkontakte/icons/dist/24/cancel';
 import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
 import Icon24Error from '@vkontakte/icons/dist/24/error';
+import Icon24Replay from '@vkontakte/icons/dist/24/replay';
 import CircleBot from './img/circle.svg';
 import CrossBot from './img/cross.svg';
 
@@ -38,6 +39,8 @@ class App extends React.Component {
 			notifhide:	false,					//Статус уведомления
 			panel: 		'main',					//Активный раздел
 			fetching:	false,					//Пулл спиннер
+			notif:		{ 'n':'', 'd':'', 'c':'' },		//Уведомление
+			error:		false,					//Ошибка
 
 			/* Игровое глобальное */
 			money: 		{},						//Деньги
@@ -65,7 +68,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 14',	//Версия сервиса
+			version:	'Beta 1.1, build 15',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -86,13 +89,14 @@ class App extends React.Component {
 			case 'time':
 				this.setState( { notifhide:true } );
 				return;
+			case 'main': if ( !Object.keys(this.state.money).length ) { this.api( "main", "0", "{}"); } break;
 			case 'about': if ( !Object.keys(this.state.contacts).length ) { this.api( "setting", "1", "{}"); } break;
 			case 'job': if ( !Object.keys(this.state.joblist).length ) { this.api( "job", "1", "{}"); } break;
 			case 'joblist': if ( !Object.keys(this.state.jobbuy).length ) { this.api( "job", "2", "{}"); } break;
 			default:	break;
 		}
 		//Меняем раздел
-		this.setState({ panel: e.currentTarget.dataset.to, notifhide:false });
+		this.setState({ panel: e.currentTarget.dataset.to });
 		
 		//Записываем в историю
 		window.history.pushState( { panel: e.currentTarget.dataset.to }, `${e.currentTarget.dataset.to}` );
@@ -101,7 +105,7 @@ class App extends React.Component {
 	//Склонение числительных
 	dn (a,b) { let c=[2,0,1,1,1,2];return b[(a%100>4 && a%100<20)?2:c[(a%10<5)?a%10:5]]; }
 	//Скрытие уведомления
-	wc = ( e ) => { this.setState( { notifhide:false } ); }
+	wc = ( e ) => { console.log('false'); this.setState( { notifhide:false } ); }
 	//Деление нулями
 	nl (n) { return n.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '); }
 	//Просмотр предприятия
@@ -122,8 +126,8 @@ class App extends React.Component {
 		if ( !this.state.fetching ) { await this.setState( { load: false } ); }
 		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
+		console.log( data );
 		if ( data.response ) {
-			console.log(data.response);
 			switch ( section ) {
 				case 'main':
 					switch ( data.response.type ) {
@@ -131,10 +135,13 @@ class App extends React.Component {
 							let menu 		= ( data.response.menu ) ? data.response.menu : {};
 							let money 		= ( data.response.money ) ? data.response.money : {};
 							await this.setState( {
+								panel:		'main',
+								error:		false,
 								menu:		menu,
 								money:		money,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						default:	break;
@@ -147,11 +154,13 @@ class App extends React.Component {
 							let money 		= ( data.response.money ) ? data.response.money : {};
 							let contacts 	= ( data.response.contacts ) ? data.response.contacts : {};
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								contacts:	contacts,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						default:	break;
@@ -164,11 +173,13 @@ class App extends React.Component {
 							let money 		= ( data.response.money ) ? data.response.money : {};
 							let homelist = ( data.response.homelist ) ? data.response.homelist : {};
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								homelist:	homelist,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						case '2':
@@ -176,11 +187,13 @@ class App extends React.Component {
 							money 		= ( data.response.money ) ? data.response.money : {};
 							let homebuy = ( data.response.homebuy ) ? data.response.homebuy : {};
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								homebuy:	homebuy,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						default:	break;
@@ -193,11 +206,13 @@ class App extends React.Component {
 							let money 		= ( data.response.money ) ? data.response.money : {};
 							let joblist = ( data.response.joblist ) ? data.response.joblist : {};
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								joblist:	joblist,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						case '2':
@@ -205,11 +220,13 @@ class App extends React.Component {
 							money 		= ( data.response.money ) ? data.response.money : {};
 							let jobbuy = ( data.response.jobbuy ) ? data.response.jobbuy : {};
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								jobbuy:		jobbuy,
 								load:		true,
 								fetching:	false,
+								notifhide: 	false,
 							} );
 							break;
 						case '3': case '4':
@@ -217,14 +234,20 @@ class App extends React.Component {
 							money 		= ( data.response.money ) ? data.response.money : {};
 							joblist = ( data.response.joblist ) ? data.response.joblist : {};
 							jobbuy = ( data.response.jobbuy ) ? data.response.jobbuy : {};
-							window.history.back()
+							window.history.back();
+							let notif = { 'n':'', 'd':'' };
+							if ( data.response.type === '3' ) notif = { 'n':'Поздравляем с покупкой нового предприятия!', 'd':'' };
+							if ( data.response.type === '4' ) notif = { 'n':'Вы продали своё предприятие.', 'd':'' };
 							await this.setState( {
+								error:		false,
 								menu:		menu,
 								money:		money,
 								joblist:	joblist,
 								jobbuy:		jobbuy,
 								load:		true,
 								fetching:	false,
+								notif:		notif,
+								notifhide: 	true,
 							} );
 							break;
 						default:	break;
@@ -237,7 +260,15 @@ class App extends React.Component {
 				money:	money,
 			} );
 		} else if ( data.error ) {
-			console.log( data.error );
+			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
+				await ( { panel: 'system' } )
+			}
+			await this.setState ( {
+				error:		true,
+				notif: 		data.error,
+				notifhide: 	true,
+				load: 		true,
+			} );
 		} else {
 			console.log( 'Ошибка соединения.' );
 		}
@@ -282,7 +313,8 @@ class App extends React.Component {
 	apiupdate = ( e ) => {
 		switch ( e.currentTarget.dataset.type ) {
 			case 'kn': 		this.apikn( '1', {} ); 		break;
-			default: 									break;	
+			case 'main': 	this.api( 'main', "0", {} ); break;
+			default: 		this.api( 'main', "0", {} ); break;	
 		}
 	}
 
@@ -296,19 +328,19 @@ class App extends React.Component {
 			case 'home2': 		this.api( 'home', '2', {} ); 		break;
 			case 'job1': 		this.api( 'job', '1', {} ); 		break;
 			case 'job2': 		this.api( 'job', '2', {} ); 		break;
-			default: 									break;	
+			default: 												break;	
 		}
 	}
 
 	//Включение сервиса
 	componentDidMount() {
 		window.addEventListener('popstate', e => e.preventDefault() & this.Pop(e));
+		window.history.pushState( { panel: 'main' }, `main` );
+		this.api( 'main', '0', {});
 		connect.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
-					window.history.pushState( { panel: 'main' }, `main` );
 					this.setState({ user: e.detail.data });
-					this.api( 'main', '0', {});
 					break;
 				default:
 			}
@@ -326,6 +358,7 @@ class App extends React.Component {
 			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
 			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
 			case 'cancel':			return <div onClick={ () => this.wc() }><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></Avatar></div>;
+			case 'start':			return <div onClick={ ( e ) => this.apiupdate( e ) } data-type="main" ><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Replay 			fill="var(--white)" /></Avatar></div>;
 			default: 				return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
 		}
 	};
@@ -335,7 +368,7 @@ class App extends React.Component {
 		switch ( e.currentTarget.dataset.notifs ) {
 			case 'knnew':
 			this.setState( { popout:
-				<Alert actions={ [ { title: 'Продолжить', action: () => this.apikn( '2', {} ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+				<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.apikn( '2', {} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 					<h2>Новая игра</h2>
 					<p>Если вы начнёте новую игру, вам будет засчитано поражение.</p>
 				</Alert>
@@ -343,7 +376,7 @@ class App extends React.Component {
 				break;
 			case 'sell_home':
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа недвижимости</h2>
 						<p>Вы действительно хотите продать выбранную недвижимость?</p>
 					</Alert>
@@ -352,7 +385,7 @@ class App extends React.Component {
 			case 'buy_job':
 				let job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Продолжить', action: () => this.api( 'job', '3', {'id':job} ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '3', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Покупка предприятия</h2>
 						<p>Вы действительно хотите купить новое предприятие за { this.nl(this.state.joblast.money) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
 					</Alert>
@@ -361,7 +394,7 @@ class App extends React.Component {
 			case 'sell_job':
 				job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Продолжить', action: () => this.api( 'job', '4', {'id':job} ), autoclose: true, style: 'cancel' }, { title: 'Отмена', autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '4', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа предприятия</h2>
 						<p>Вы действительно хотите продать выбранное предприятие за { this.nl(this.state.joblast.money_sell) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
 					</Alert>
@@ -381,16 +414,16 @@ class App extends React.Component {
 		return (
 			<Epic activeStory="home" tabbar={false}>
 				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
-					<Main 		id="main" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} apiupdate={this.apiupdate} wc={this.wc} />
-					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<Money 		id="money" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<Home 		id="home" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} />
-					<HomeFrame	id="homeframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
-					<Job 		id="job" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} jf={this.jf} />
-					<JobList	id="joblist"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} jf={this.jf} />
-					<JobFrame	id="jobframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} />
-					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} openSheet={this.openSheet} apiupdate={this.apiupdate} kn={this.kn}/>
-					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} />
+					<Main 		id="main" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
+					<Money 		id="money" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
+					<Home 		id="home" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
+					<HomeFrame	id="homeframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} />
+					<Job 		id="job" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} jf={this.jf} />
+					<JobList	id="joblist"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} jf={this.jf} />
+					<JobFrame	id="jobframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} />
+					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} kn={this.kn}/>
+					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate}	/>
+					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 				</View>
 			</Epic>
 		);

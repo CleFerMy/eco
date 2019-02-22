@@ -216,6 +216,10 @@ html, body {
     border-radius: 0 0 15px 15px ;
 }
 
+.notif {
+    z-index: 300;
+}
+
 div .notif, .List {
     border-radius: 25px;
 }

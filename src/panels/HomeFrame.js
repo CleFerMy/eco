@@ -19,27 +19,41 @@ const HomeFrame = props => (
         <div className="hleft"></div><div className="hright"></div>
         { props.state.load ? (
 			<div>
-                <div className='balance'>
-                    <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
-                </div>
-                <Div className="homeframeimg" ><img className="notifimage" src={ Home } alt="картиночка" /></Div>
-                <Group title="Подробно">
-                    <List>
-                        <Cell onClick={ props.openSheet } data-notifs="sell_home" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description="1 000 000 ридия" multiline>Продать</Cell>
-                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Place /></Avatar> } description="ул. Крылова, д.1" multiline>Адрес</Cell>
-                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24UserAdd /></Avatar> } description="2 места" multiline>Свободные места</Cell>
-                    </List>
-                </Group>
-                <Group title="Жители">
-                    <List>
-                        <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Владелец" >Имя Фамилия</Cell>
-                        <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Сын" >Имя Фамилия</Cell>
-                        <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Внебрачный дедушка" >Имя Фамилия</Cell>
-                    </List>
-                </Group>
-                <div className='setting'>
-                    <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
-                </div>
+                { !props.state.error ? (
+						<div>
+                        <div className='balance'>
+                            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
+                        </div>
+                        <Div className="homeframeimg" ><img className="notifimage" src={ Home } alt="картиночка" /></Div>
+                        <Group title="Подробно">
+                            <List>
+                                <Cell onClick={ props.openSheet } data-notifs="sell_home" before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description="1 000 000 ридия" multiline>Продать</Cell>
+                                <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Place /></Avatar> } description="ул. Крылова, д.1" multiline>Адрес</Cell>
+                                <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24UserAdd /></Avatar> } description="2 места" multiline>Свободные места</Cell>
+                            </List>
+                        </Group>
+                        <Group title="Жители">
+                            <List>
+                                <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Владелец" >Имя Фамилия</Cell>
+                                <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Сын" >Имя Фамилия</Cell>
+                                <Cell multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={28} ><Icon24User /></Avatar>} description="Внебрачный дедушка" >Имя Фамилия</Cell>
+                            </List>
+                        </Group>
+                        <div className='setting'>
+                            <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        { props.state.notifhide && 
+                            <Group className="notif"> 
+                                <List>
+                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
+                                </List>
+                            </Group>
+                        }
+                    </div>
+                ) }
             </div>
 		) : (
 			<div>
