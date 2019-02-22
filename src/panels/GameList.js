@@ -5,16 +5,16 @@ import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
 import Icon24Settings from '@vkontakte/icons/dist/24/settings';
-import Icon28AddOutline from '@vkontakte/icons/dist/28/add_outline';
-import Icon24Home from '@vkontakte/icons/dist/24/home';
+
+import KN from '../img/kn.png';
 
 const osname = platform();
 
-const HomeList = props => (
+const GameList = props => (
 	<Panel id={ props.id }>
-		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Работа</PanelHeader>
+		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Игры</PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
-        <PullToRefresh onRefresh={ () => { props.apiq( "home2" ) } } isFetching={ props.state.fetching }>
+        <PullToRefresh onRefresh={ () => { props.apiq( "job2" ) } } isFetching={ props.state.fetching }>
             { props.state.load ? (
                 <div>
                     { !props.state.error ? (
@@ -29,16 +29,10 @@ const HomeList = props => (
                             <div className='balance'>
                                 <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                             </div>
-                            <Group title="Предприятия">
-                                { Object.keys(props.state.jobbuy).length > 0 ? (
-                                    <List>
-                                        { props.state.jobbuy.map( (list, i) => <Cell expandable key={i} onClick={ props.go } data-to="jobframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
-                                    </List>
-                                ) : (
-                                    <List>
-                                        <Cell multiline={true} before={ props.icons( 'empty' ) } >Нет доступных для покупки домов</Cell>
-                                    </List>
-                                ) }
+                            <Group>
+                                <List>
+                                    <Cell expandable onClick={  ( e ) => { props.go( e ); props.apiupdate( e ); } } data-type="kn" data-to="kn" multiline={true} before={ <Avatar src={ KN } type="app" size={48} ></Avatar> } description="10 ридия за выигрыш">Крестики-нолики</Cell>
+                                </List>
                             </Group>
                             <div className='setting'>
                                 <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
@@ -66,4 +60,4 @@ const HomeList = props => (
 	</Panel>
 );
 
-export default HomeList;
+export default GameList;

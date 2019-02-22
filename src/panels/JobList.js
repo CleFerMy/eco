@@ -33,7 +33,7 @@ const JobList = props => (
                             <Group title="Предприятия">
                                 { Object.keys(props.state.jobbuy).length > 0 ? (
                                     <List>
-                                        { props.state.jobbuy.map( (list, i) => <Cell key={i} onClick={ (e) => {props.go(e); props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Стоимость: ` + props.nl( list.money ) + props.dn( list.money, moneyname['1'] ) }>{ list.name }</Cell> ) }
+                                        { props.state.jobbuy.map( (list, i) => <Cell expandable key={i} onClick={ (e) => {props.go(e); props.jf(list)} } data-to="jobframe" data-jf="list" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ `Стоимость: ` + props.nl( list.money ) + props.dn( list.money, moneyname['1'] ) }>{ list.name }</Cell> ) }
                                     </List>
                                 ) : (
                                     <List>

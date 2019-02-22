@@ -26,7 +26,7 @@ const Main = props => (
 										<div onClick={ props.go } data-to="time" className="statsitem stats_bank"><span className="statsspan">Банк</span><div className="statsitemdesc">{ props.state.menu[1] ? ( props.state.menu[1] ) : ( `Неизвестно` ) }</div></div>
 										<div onClick={ props.go } data-to="time" className="statsitem stats_shop"><span className="statsspan">Магазин</span><div className="statsitemdesc">{ props.state.menu[2] ? ( props.state.menu[2] ) : ( `Неизвестно` ) }</div></div>
 										<div onClick={ props.go } data-to="job" className="statsitem stats_job"><span className="statsspan">Работа</span><div className="statsitemdesc">{ props.state.menu[3] ? ( props.state.menu[3] ) : ( `Неизвестно` ) }</div></div>
-										<div onClick={  ( e ) => { props.go( e ); props.apiupdate( e ); } } data-type="kn" data-to="kn" className="statsitem stats_game"><span className="statsspan">Игра</span><div className="statsitemdesc">Крестики-нолики</div></div>
+										<div onClick={ props.go } data-to="gamelist" className="statsitem stats_game"><span className="statsspan">Игры</span><div className="statsitemdesc">Быстрые деньги</div></div>
 									</div>
 								</HorizontalScroll>
 							</div>

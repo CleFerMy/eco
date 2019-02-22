@@ -20,6 +20,7 @@ import HomeFrame from './panels/HomeFrame';
 import Job from './panels/Job';
 import JobFrame from './panels/JobFrame';
 import JobList from './panels/JobList';
+import GameList from './panels/GameList';
 import GameKN from './panels/GameKN';
 import About from './panels/About';
 
@@ -68,7 +69,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 15',	//Версия сервиса
+			version:	'Beta 1.1, build 16',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Setting */
@@ -87,7 +88,7 @@ class App extends React.Component {
 		switch ( e.currentTarget.dataset.to ) {
 			//Закрытый раздел
 			case 'time':
-				this.setState( { notifhide:true } );
+				this.setState( { notifhide:true, notif:{ 'n':'Данный раздел временно недоступен', 'd':'', 'c':'' } } );
 				return;
 			case 'main': if ( !Object.keys(this.state.money).length ) { this.api( "main", "0", "{}"); } break;
 			case 'about': if ( !Object.keys(this.state.contacts).length ) { this.api( "setting", "1", "{}"); } break;
@@ -261,10 +262,9 @@ class App extends React.Component {
 			} );
 		} else if ( data.error ) {
 			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
-				await ( { panel: 'system' } )
+				await ( { panel: 'system', error: true, } )
 			}
 			await this.setState ( {
-				error:		true,
 				notif: 		data.error,
 				notifhide: 	true,
 				load: 		true,
@@ -421,6 +421,7 @@ class App extends React.Component {
 					<Job 		id="job" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} jf={this.jf} />
 					<JobList	id="joblist"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} jf={this.jf} />
 					<JobFrame	id="jobframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} />
+					<GameList	id="gamelist" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} kn={this.kn}/>
 					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate}	/>
 					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
