@@ -22,6 +22,7 @@ import JobFrame from './panels/JobFrame';
 import JobList from './panels/JobList';
 import GameList from './panels/GameList';
 import GameKN from './panels/GameKN';
+import GameBJ from './panels/GameBJ';
 import About from './panels/About';
 
 const osname = platform();
@@ -69,8 +70,11 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 16',	//Версия сервиса
+			version:	'Beta 1.1, build 17',	//Версия сервиса
 			contacts:	{},						//Список партнёров
+
+			/* Раздел Blackjack */
+			cardlist:	[],
 
 			/* Раздел Setting */
 			//Пусто
@@ -81,6 +85,7 @@ class App extends React.Component {
 		this.openSheet 	= this.openSheet.bind(this);	//Всплывающие объекты
 		this.wc			= this.wc.bind(this);			//Статус уведомления
 		this.jf			= this.jf.bind(this);			//Просмотр предприятия
+		this.cardadd	= this.cardadd.bind(this);		//Добавление карты
 	}
 	
 	//Переход на другой раздел
@@ -127,7 +132,6 @@ class App extends React.Component {
 		if ( !this.state.fetching ) { await this.setState( { load: false } ); }
 		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
-		console.log( data );
 		if ( data.response ) {
 			switch ( section ) {
 				case 'main':
@@ -296,7 +300,11 @@ class App extends React.Component {
 				money:		money,
 			} );
 		} else if ( data.error ) {
-			console.log( data.error );
+			await this.setState ( {
+				notif: 		data.error,
+				notifhide: 	true,
+				load: 		true,
+			} );
 		} else {
 			console.log( 'Ошибка соединения.' );
 		}
@@ -329,6 +337,24 @@ class App extends React.Component {
 			case 'job1': 		this.api( 'job', '1', {} ); 		break;
 			case 'job2': 		this.api( 'job', '2', {} ); 		break;
 			default: 												break;	
+		}
+	}
+
+	cardadd = () => {
+		let card = this.state.cardlist;
+		let name = ["card_s", "card_h", "card_c", "card_d"];
+		let name2 = ["Т", "2", "3", "4", "5", "6", "7", "8", "9", "10", "В", "Д", "К"];
+		let randname = Math.floor(Math.random() * name.length);
+		let randname2 = Math.floor(Math.random() * name2.length);
+
+		if ( Object.keys(card).length < 9 ) {
+			card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
+			this.setState( { cardlist:card } );
+		} else {
+			this.setState( {
+				notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
+				notifhide: 	true,
+			} );
 		}
 	}
 
@@ -423,6 +449,7 @@ class App extends React.Component {
 					<JobFrame	id="jobframe"	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} />
 					<GameList	id="gamelist" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} kn={this.kn}/>
+					<GameBJ		id="bj"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} cardadd={this.cardadd} />
 					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate}	/>
 					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 				</View>

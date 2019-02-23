@@ -32,6 +32,7 @@ const GameList = props => (
                             <Group>
                                 <List>
                                     <Cell expandable onClick={  ( e ) => { props.go( e ); props.apiupdate( e ); } } data-type="kn" data-to="kn" multiline={true} before={ <Avatar src={ KN } type="app" size={48} ></Avatar> } description="10 ридия за выигрыш">Крестики-нолики</Cell>
+                                    <Cell expandable onClick={  ( e ) => { props.go( e ); } } data-type="bj" data-to="bj" multiline={true} before={ <Avatar type="app" size={48} ></Avatar> } description="выигрыш зависит от ставки">Blackjack</Cell>
                                 </List>
                             </Group>
                             <div className='setting'>

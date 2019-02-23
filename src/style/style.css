@@ -132,6 +132,10 @@ html, body {
     margin-top: 10px;
 }
 
+.balance > button {
+    z-index: 50;
+}
+
 .moneyitem {
     width: 48px;
     height: 48px;
@@ -202,6 +206,7 @@ html, body {
 
 .Group, .List {
     border-radius: 15px;
+    z-index: 100;
 }
 
 .Cell:first-child:last-child > .Tappable {
