@@ -1,12 +1,16 @@
 {
-  "main.css": "static/css/main.d38f8319.css",
-  "main.css.map": "static/css/main.d38f8319.css.map",
-  "main.js": "static/js/main.7ee8ca63.js",
-  "main.js.map": "static/js/main.7ee8ca63.js.map",
+  "main.css": "static/css/main.8b4fa2d5.css",
+  "main.css.map": "static/css/main.8b4fa2d5.css.map",
+  "main.js": "static/js/main.c3a17bf4.js",
+  "main.js.map": "static/js/main.c3a17bf4.js.map",
+  "static\\media\\b.jpg": "static/media/b.a298ace1.jpg",
   "static\\media\\bank.svg": "static/media/bank.b1ee7ffe.svg",
+  "static\\media\\c.svg": "static/media/c.0f795caa.svg",
   "static\\media\\circle.svg": "static/media/circle.5d64416f.svg",
   "static\\media\\cross.svg": "static/media/cross.ca3cb1e8.svg",
+  "static\\media\\d.svg": "static/media/d.d84f765d.svg",
   "static\\media\\game.svg": "static/media/game.51cb987c.svg",
+  "static\\media\\h.svg": "static/media/h.e5101751.svg",
   "static\\media\\home.png": "static/media/home.7852d2a2.png",
   "static\\media\\home.svg": "static/media/home.e1b5570a.svg",
   "static\\media\\job.svg": "static/media/job.66bb2d01.svg",
@@ -14,5 +18,6 @@
   "static\\media\\lefto.svg": "static/media/lefto.0b79e7d2.svg",
   "static\\media\\righto.svg": "static/media/righto.fc3b0f97.svg",
   "static\\media\\s.png": "static/media/s.0955caab.png",
+  "static\\media\\s.svg": "static/media/s.5819e3e9.svg",
   "static\\media\\shop.svg": "static/media/shop.ba249130.svg"
 }
