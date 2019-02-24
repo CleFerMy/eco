@@ -1,11 +1,13 @@
 import React from 'react';
-import { Panel, PanelHeader, HeaderButton, platform, IOS, Group, Footer, Button, Avatar, List, Cell, Spinner, PullToRefresh } from '@vkontakte/vkui';
+import { Panel, PanelHeader, HeaderButton, platform, IOS, Group, Footer, Button, Avatar, List, Cell, Spinner } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
 import Icon24Add from '@vkontakte/icons/dist/24/add';
 import Icon24Replay from '@vkontakte/icons/dist/24/replay';
+import Icon24Search from '@vkontakte/icons/dist/24/search';
 
+import Hidden from '../img/s.png';
 import '../style/bj.css';
 import card_h from '../img/h.svg';
 import card_d from '../img/d.svg';
@@ -38,43 +40,58 @@ const BJ = props => (
                             }
                             <div className="bj_body">
                                 <div>
-                                    { Object.keys(props.state.cardlist).length > 0 ? (
+                                    { Object.keys(props.state.cardbot).length > 0 ? (
                                         <div className="card_bot">
-                                            { props.state.cardlist.map( (list, i) => 
-                                                <div key={i} className="card" >
-                                                    <div className={ list.name + ` name` }>{ list.name2 }</div>
-                                                    <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
-                                                </div> 
+                                            { props.state.cardbot.map( (list, i) => 
+                                                <div key={i} className={ `card ${ i === 1 && !props.state.opening ? ` hidden` : `` }` } >
+                                                    { i === 1 && !props.state.opening ? (
+                                                        <div className="front hidden">
+                                                             <div className="icon hidden"><img src={ Hidden } alt="icon"></img></div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="front">
+                                                            <div className={ list.name + ` name` }>{ list.name2 }</div>
+                                                            <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
+                                                        </div>
+                                                    ) }
+                                                </div>
                                             ) }
                                         </div>
                                     ) : (
                                         <div className="card_bot">
-                                            <div className="cardempty" >Пусто</div>
+                                            <div className="cardempty" ></div>
                                         </div>
                                     ) }
                                 </div>
                                 <div>
-                                    { Object.keys(props.state.cardlist).length > 0 ? (
+                                    { Object.keys(props.state.carduser).length > 0 ? (
                                         <div className="card_user">
-                                            { props.state.cardlist.map( (list, i) => 
+                                            { props.state.carduser.map( (list, i) => 
                                                 <div key={i} className="card" >
-                                                    <div className={ list.name + ` name` }>{ list.name2 }</div>
-                                                    <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
+                                                    <div className="front">
+                                                        <div className={ list.name + ` name` }>{ list.name2 }</div>
+                                                        <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
+                                                    </div>
                                                 </div> 
                                             ) }
                                         </div>
                                     ) : (
                                         <div className="card_user">
-                                            <div className="cardempty" >Пусто</div>
+                                            <div className="cardempty" ></div>
                                         </div>
                                     ) }
                                 </div>
                             </div>
-                        <div className='msetting'>
-                            <div onClick={ ( e ) => props.cardadd( e ) } ><Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="var(--white)" /></Avatar></div>
+                        { Object.keys(props.state.cardbot).length > 1 && !props.state.opening &&
+                            <div className='mopen'>
+                                <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="var(--white)" /></Avatar></div>
+                            </div>
+                        }
+                        <div className='madd'>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="add" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="var(--white)" /></Avatar></div>
                         </div>
                         <div className="mreplay">
-                            <div onClick={ () => { props.apiq( "bj" ) } }><Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="var(--white)" /></Avatar></div>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="replay" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="var(--white)" /></Avatar></div>
                         </div>
                     </div>
                 ) : (

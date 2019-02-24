@@ -59,7 +59,19 @@
     box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
 }
 
-.card > .name {
+.card.hidden {
+    background: linear-gradient(to top, #462d69, #533879);
+    background: linear-gradient(45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%),linear-gradient(-45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%);
+    background-size: 1em 1em;
+    background-color: #533879;
+    width: 95px;
+    height: 135px;
+    border: 1px solid #2b1747;
+    border-radius: 10px;
+    box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
+}
+
+.card > .front > .name {
     font-family: HPC, Arial, sans-serif;
     justify-content: flex-end;
     align-items: flex-start;
@@ -69,13 +81,20 @@
     font-size: 20pt;
 }
 
-.card > .icon {
+.card > .front > .icon {
     position: static;
     display: flex;
     justify-content: center;
 }
 
-.card > .icon > img {
+.card > .front > .icon.hidden {
+    position: relative;
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.card > .front > .icon > img {
     width: 60px;
     height: 60px;
 }
@@ -92,12 +111,25 @@
     margin-left: -60px;
 }
 
-.mreplay {
-    display: flex;
-    justify-content: flex-end;
+.madd {
     position: absolute;
-    width: auto;
-    bottom: 20px;
-    left: 20px;
+    bottom: 165px;
+    left: 50%;
+    z-index: 10;
+}
+
+.mreplay {
+    position: absolute;
+    bottom: 165px;
+    right: 50%;
+    z-index: 10;
+}
+
+.mopen {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    top: 260px;
     z-index: 10;
 }

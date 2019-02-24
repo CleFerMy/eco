@@ -74,7 +74,9 @@ class App extends React.Component {
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
-			cardlist:	[],
+			carduser:	[],
+			cardbot:	[],
+			opening:	false,
 
 			/* Раздел Setting */
 			//Пусто
@@ -313,7 +315,9 @@ class App extends React.Component {
 	async apibj () {
 		if ( !this.state.fetching ) { await this.setState( { load: false } ); }
 		this.setState ( { 
-			cardlist:	[],
+			carduser:	[],
+			cardbot:	[],
+			opening:	false,
 			load:		true,
 			fetching:	false,
 			notifhide: 	false,
@@ -351,21 +355,40 @@ class App extends React.Component {
 		}
 	}
 
-	cardadd = () => {
-		let card = this.state.cardlist;
-		let name = ["card_s", "card_h", "card_c", "card_d"];
-		let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
-		let randname = Math.floor(Math.random() * name.length);
-		let randname2 = Math.floor(Math.random() * name2.length);
+	cardadd = ( e ) => {
+		switch ( e.currentTarget.dataset.type ) {
+			case 'replay':
+				this.apibj();
+				break;
+			case 'add':
+				let card = this.state.carduser;
+				let cardbot = this.state.cardbot;
+				let name = ["card_s", "card_h", "card_c", "card_d"];
+				let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
+				let randname = Math.floor(Math.random() * name.length);
+				let randname2 = Math.floor(Math.random() * name2.length);
 
-		if ( Object.keys(card).length < 9 ) {
-			card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
-			this.setState( { cardlist:card } );
-		} else {
-			this.setState( {
-				notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
-				notifhide: 	true,
-			} );
+				if ( Object.keys(card).length < 2 ) {
+					let randnameb = Math.floor(Math.random() * name.length);
+					let randname2b = Math.floor(Math.random() * name2.length);
+					cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb], 'name2':name2[randname2b] };
+					this.setState( { cardbot:cardbot } );
+				}
+
+				if ( Object.keys(card).length < 9 ) {
+					card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
+					this.setState( { carduser:card } );
+				} else {
+					this.setState( {
+						notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
+						notifhide: 	true,
+					} );
+				}
+				break;
+			case 'open':
+				this.setState( { opening:true } );
+				break;
+			default: 	break;
 		}
 	}
 
