@@ -3,20 +3,19 @@
     src: url(HoylePlayingCards.ttf);
   }
 
-.bj_body {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
+#bj.Panel--tm-gray .Panel__in, .Panel--tm-gray::after {
     background-image: url(../img/b.jpg);
     background-repeat: repeat;
     background-size: 100px;
 }
 
-.card_user {
-    bottom: 20px;
+.bj_body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card_bot {
     position: fixed;
     align-items: center;
     justify-content: center;
@@ -24,6 +23,18 @@
     height: 135px;
     width: 90%;
     margin-left: 5%;
+    top: 110px;
+}
+
+.card_user {
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 135px;
+    width: 90%;
+    margin-left: 5%;
+    bottom: 20px;
 }
 
 .cardempty {
@@ -79,4 +90,14 @@
 
 .card:first-child ~ div {
     margin-left: -60px;
+}
+
+.mreplay {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    width: auto;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
 }

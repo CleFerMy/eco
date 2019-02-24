@@ -17,91 +17,93 @@ const Home = props => (
 	<Panel id={ props.id }>
 		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Дом</PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
-        <PullToRefresh onRefresh={ () => { props.apiq( "home1" ) } } isFetching={ props.state.fetching }>
-            { props.state.load ? (
-                <div>
-                    { !props.state.error ? (
-						<div>
-                            { props.state.notifhide && 
-                                <Group className="notif"> 
-                                    <List>
-                                        <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
-                                    </List>
-                                </Group>
-                            }
-                            <div className='balance'>
-                                <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
-                            </div>
-                            <Div>
-                                <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
-                            </Div>
-                            <Group title="Дома">
-                                { Object.keys(props.state.homelist).length > 0 ? (
-                                    <List>
-                                        { props.state.homelist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ 'Дом №' + list.id }</Cell> ) }
-                                    </List>
-                                ) : (
-                                    <List>
-                                        <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного дома</Cell>
-                                    </List>
-                                ) }
-                            </Group>
-                            <Group title="Земельные участки" description="Недоступно" >
-                                { Object.keys(props.state.regionlist).length > 0 ? (
-                                    <List>
-                                        { props.state.regionlist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Place /></Avatar> } description={ list.des }>{ 'Участок №' + list.id }</Cell> ) }
-                                    </List>
-                                ) : (
-                                    <List>
-                                        <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного земельного участка</Cell>
-                                    </List>
-                                ) }
-                            </Group>
-                            <Group title="Автомобили" description="Недоступно" >
-                                { Object.keys(props.state.autolist).length > 0 ? (
-                                    <List>
-                                        { props.state.autolist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Flash /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
-                                    </List>
-                                ) : (
-                                    <List>
-                                        <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного автомобиля</Cell>
-                                    </List>
-                                ) }
-                            </Group>
-                            <Group title="Семья" description="Недоступно" >
-                                { Object.keys(props.state.family).length > 0 ? (
-                                    <List>
-                                        { props.state.family.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon16Users /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
-                                    </List>
-                                ) : (
-                                    <List>
-                                        <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного участника семьи</Cell>
-                                    </List>
-                                ) }
-                            </Group>
-                            <div className='setting'>
-                                <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
-                            </div>
+        { props.state.load ? (
+            <div>
+                { !props.state.error ? (
+                    <div>
+                        <div className='balance'>
+                            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
                         </div>
-					) : (
-						<div>
-							{ props.state.notifhide && 
-								<Group className="notif"> 
-									<List>
-										<Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
-									</List>
-								</Group>
-							}
-						</div>
-					) }
-                </div>
-            ) : (
-                <div>
-                    <Spinner size="large" style={{ marginTop: 25 }} />
-                    <Footer>Загрузка...</Footer>
-                </div>
-            ) }
-        </PullToRefresh>
+                        <PullToRefresh onRefresh={ () => { props.apiq( "home1" ) } } isFetching={ props.state.fetching }>
+                            <div>
+                                { props.state.notifhide && 
+                                    <Group className="notif"> 
+                                        <List>
+                                            <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
+                                        </List>
+                                    </Group>
+                                }
+                                <Div>
+                                    <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
+                                </Div>
+                                <Group title="Дома">
+                                    { Object.keys(props.state.homelist).length > 0 ? (
+                                        <List>
+                                            { props.state.homelist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ 'Дом №' + list.id }</Cell> ) }
+                                        </List>
+                                    ) : (
+                                        <List>
+                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного дома</Cell>
+                                        </List>
+                                    ) }
+                                </Group>
+                                <Group title="Земельные участки" description="Недоступно" >
+                                    { Object.keys(props.state.regionlist).length > 0 ? (
+                                        <List>
+                                            { props.state.regionlist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Place /></Avatar> } description={ list.des }>{ 'Участок №' + list.id }</Cell> ) }
+                                        </List>
+                                    ) : (
+                                        <List>
+                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного земельного участка</Cell>
+                                        </List>
+                                    ) }
+                                </Group>
+                                <Group title="Автомобили" description="Недоступно" >
+                                    { Object.keys(props.state.autolist).length > 0 ? (
+                                        <List>
+                                            { props.state.autolist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Flash /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                                        </List>
+                                    ) : (
+                                        <List>
+                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного автомобиля</Cell>
+                                        </List>
+                                    ) }
+                                </Group>
+                                <Group title="Семья" description="Недоступно" >
+                                    { Object.keys(props.state.family).length > 0 ? (
+                                        <List>
+                                            { props.state.family.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon16Users /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
+                                        </List>
+                                    ) : (
+                                        <List>
+                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного участника семьи</Cell>
+                                        </List>
+                                    ) }
+                                </Group>
+                            </div>
+                        </PullToRefresh>
+                        <div className='setting'>
+                            <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        { props.state.notifhide && 
+                            <Group className="notif"> 
+                                <List>
+                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
+                                </List>
+                            </Group>
+                        }
+                    </div>
+                ) }
+            </div>
+        ) : (
+            <div>
+                <Spinner size="large" style={{ marginTop: 25 }} />
+                <Footer>Загрузка...</Footer>
+            </div>
+        ) }
 	</Panel>
 );
 
