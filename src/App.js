@@ -70,7 +70,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 17',	//Версия сервиса
+			version:	'Beta 1.1, build 18',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -310,6 +310,16 @@ class App extends React.Component {
 		}
 	}
 
+	async apibj () {
+		if ( !this.state.fetching ) { await this.setState( { load: false } ); }
+		this.setState ( { 
+			cardlist:	[],
+			load:		true,
+			fetching:	false,
+			notifhide: 	false,
+		} );
+	}
+
 	//API К-Н
 	kn = ( e ) => {
 		let m = e.currentTarget.dataset.m;
@@ -336,6 +346,7 @@ class App extends React.Component {
 			case 'home2': 		this.api( 'home', '2', {} ); 		break;
 			case 'job1': 		this.api( 'job', '1', {} ); 		break;
 			case 'job2': 		this.api( 'job', '2', {} ); 		break;
+			case 'bj': 			this.apibj(); 						break;
 			default: 												break;	
 		}
 	}
@@ -343,7 +354,7 @@ class App extends React.Component {
 	cardadd = () => {
 		let card = this.state.cardlist;
 		let name = ["card_s", "card_h", "card_c", "card_d"];
-		let name2 = ["Т", "2", "3", "4", "5", "6", "7", "8", "9", "10", "В", "Д", "К"];
+		let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
 		let randname = Math.floor(Math.random() * name.length);
 		let randname2 = Math.floor(Math.random() * name2.length);
 

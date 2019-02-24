@@ -1,3 +1,8 @@
+@font-face {
+    font-family: HPC;
+    src: url(HoylePlayingCards.ttf);
+  }
+
 .bj_body {
     position: absolute;
     top: 0;
@@ -44,35 +49,24 @@
 }
 
 .card > .name {
+    font-family: HPC, Arial, sans-serif;
     justify-content: flex-end;
     align-items: flex-start;
     font-weight: 600;
-    position: absolute;
-    margin: 7px 10px;
+    position: static;
+    margin: 3px 10px;
     font-size: 20pt;
 }
 
-.card > .icon2 {
+.card > .icon {
+    position: static;
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-
-.card > .icon2 > img {
-    width: 60px;
-    height: 60px;
-}
-
-.card > .icon {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin: 10px;
 }
 
 .card > .icon > img {
-    width: 20px;
-    height: 20px;
+    width: 60px;
+    height: 60px;
 }
 
 .card_h, .card_d {
