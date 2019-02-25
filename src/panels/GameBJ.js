@@ -82,6 +82,8 @@ const BJ = props => (
                                     ) }
                                 </div>
                             </div>
+                        { props.state.opening && <div className="panelbot"><div className="balancebot">{ props.state.botpoints }</div></div> }
+                        { props.state.userpoints > 0 && <div className="paneluser"><div className="balanceuser">{ props.state.userpoints }</div></div> }
                         { Object.keys(props.state.cardbot).length > 1 && !props.state.opening &&
                             <div className='mopen'>
                                 <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="var(--white)" /></Avatar></div>

@@ -70,13 +70,15 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 19',	//Версия сервиса
+			version:	'Beta 1.1, build 20',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
 			carduser:	[],
 			cardbot:	[],
 			opening:	false,
+			botpoints:	0,
+			userpoints:	0,		
 
 			/* Раздел Setting */
 			//Пусто
@@ -363,8 +365,11 @@ class App extends React.Component {
 			case 'add':
 				let card = this.state.carduser;
 				let cardbot = this.state.cardbot;
+				let botpoints = this.state.botpoints;
+				let userpoints = this.state.userpoints;
 				let name = ["card_s", "card_h", "card_c", "card_d"];
 				let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
+				let coin = { '2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'0':10,'a':10,'s':10,'d':10,'f':11 };
 				let randname = Math.floor(Math.random() * name.length);
 				let randname2 = Math.floor(Math.random() * name2.length);
 
@@ -372,12 +377,14 @@ class App extends React.Component {
 					let randnameb = Math.floor(Math.random() * name.length);
 					let randname2b = Math.floor(Math.random() * name2.length);
 					cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb], 'name2':name2[randname2b] };
-					this.setState( { cardbot:cardbot } );
+					botpoints = botpoints + coin[name2[randname2b]];
+					this.setState( { cardbot:cardbot, botpoints:botpoints } );
 				}
 
 				if ( Object.keys(card).length < 9 ) {
 					card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
-					this.setState( { carduser:card } );
+					userpoints = userpoints + coin[name2[randname2]];
+					this.setState( { carduser:card, userpoints:userpoints } );
 				} else {
 					this.setState( {
 						notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
