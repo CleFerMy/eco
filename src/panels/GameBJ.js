@@ -29,7 +29,7 @@ const BJ = props => (
                 { !props.state.error ? (
                     <div>
                         <div className='balance'>
-                            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.state.money.c1 ) : 'Неизвестно' }</Button>
+                            <Button style={ { background: "rgba(0,0,0,0.2)", color: "#ffc800" } } onClick={ props.go } data-to="money" before={ <Icon24Coins fill="#ffc800" /> }>{ props.state.money.c2 ? ( props.state.money.c2 ) : 'Неизвестно' }</Button>
                         </div>
                             { props.state.notifhide && 
                                 <Group className="notif"> 
@@ -45,11 +45,11 @@ const BJ = props => (
                                             { props.state.cardbot.map( (list, i) => 
                                                 <div key={i} className={ `card ${ i === 1 && !props.state.opening ? ` hidden` : `` }` } >
                                                     { i === 1 && !props.state.opening ? (
-                                                        <div className="front hidden">
+                                                        <div className="front hidden active">
                                                              <div className="icon hidden"><img src={ Hidden } alt="icon"></img></div>
                                                         </div>
                                                     ) : (
-                                                        <div className="front">
+                                                        <div className="front active">
                                                             <div className={ list.name + ` name` }>{ list.name2 }</div>
                                                             <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
                                                         </div>

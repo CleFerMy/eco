@@ -45,11 +45,20 @@
     background: rgba(0,0,0,0.2);
     width: 95px;
     height: 135px;
-    border: 1px dotted #8c8f8d;
     border-radius: 10px;
 }
 
+@keyframes carding {
+    0% {
+        transform: translate3d(-100vw, 0vh, 0px);
+    }
+    100% {
+        transform: translate3d(0px, 0px, 0px);
+    }
+}
+
 .card {
+    animation: carding 1s ease;
     background: #eff3ef;
     background: linear-gradient(to top, #cecece, #eff3ef);
     width: 95px;
@@ -59,7 +68,12 @@
     box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
 }
 
+.card.active {
+    transition: 1s;
+}
+
 .card.hidden {
+    transition: 1s;
     background: linear-gradient(to top, #462d69, #533879);
     background: linear-gradient(45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%),linear-gradient(-45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%);
     background-size: 1em 1em;
