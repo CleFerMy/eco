@@ -59,14 +59,39 @@
 }
 
 .card {
+    perspective: 1000px;
     position: static;
     width: 95px;
     height: 135px;
     animation: carding 1s ease;
 }
 
-.card.active {
-    transition: 1s;
+@keyframes backing {
+    0% {
+        transform: rotateY(-180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes fronting {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.card_user > .card > .back {
+    animation: backing 0.5s ease-in;
+    animation-delay: 1s;
+}
+
+.card_user > .card > .front {
+    animation: fronting 0.5s ease-in;
+    animation-delay: 1s;
 }
 
 .front {
@@ -92,6 +117,10 @@
     border: 1px solid #8c8f8d;
     border-radius: 10px;
     box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
+}
+
+.back,.front {
+    backface-visibility: hidden;
 }
 
 .card > div > .name {

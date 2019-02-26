@@ -71,12 +71,12 @@ const BJ = props => (
                                         <div className="card_user">
                                             { props.state.carduser.map( (list, i) => 
                                                 <div key={i} className="card" >
-                                                    <div className="front">
-                                                        <div className="icon"><img src={ Hidden } alt="icon"></img></div>
-                                                    </div>
                                                     <div className="back">
                                                         <div className={ list.name + ` name` }>{ list.name2 }</div>
                                                         <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
+                                                    </div>
+                                                    <div className="front">
+                                                        <div className="icon"><img src={ Hidden } alt="icon"></img></div>
                                                     </div>
                                                 </div> 
                                             ) }
