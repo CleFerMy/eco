@@ -70,7 +70,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 20',	//Версия сервиса
+			version:	'Beta 1.1, build 21',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -323,6 +323,8 @@ class App extends React.Component {
 			load:		true,
 			fetching:	false,
 			notifhide: 	false,
+			botpoints:	0,
+			userpoints:	0,	
 		} );
 	}
 

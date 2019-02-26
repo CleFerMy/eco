@@ -59,21 +59,18 @@
 }
 
 .card {
-    animation: carding 1s ease;
-    background: #eff3ef;
-    background: linear-gradient(to top, #cecece, #eff3ef);
+    position: static;
     width: 95px;
     height: 135px;
-    border: 1px solid #8c8f8d;
-    border-radius: 10px;
-    box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
+    animation: carding 1s ease;
 }
 
 .card.active {
     transition: 1s;
 }
 
-.card.hidden {
+.front {
+    position: absolute;
     transition: 1s;
     background: linear-gradient(to top, #462d69, #533879);
     background: linear-gradient(45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%),linear-gradient(-45deg,rgba(0, 0, 0, 0) 48%,rgba(0, 0, 0, 0.2) 50%,rgba(0, 0, 0, 0) 52%);
@@ -86,7 +83,18 @@
     box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
 }
 
-.card > .front > .name {
+.back {
+    position: absolute;
+    background: #eff3ef;
+    background: linear-gradient(to top, #cecece, #eff3ef);
+    width: 95px;
+    height: 135px;
+    border: 1px solid #8c8f8d;
+    border-radius: 10px;
+    box-shadow: 7px 7px 10px rgba(0,0,0,0.4);
+}
+
+.card > div > .name {
     font-family: HPC, Arial, sans-serif;
     justify-content: flex-end;
     align-items: flex-start;
@@ -96,20 +104,20 @@
     font-size: 20pt;
 }
 
-.card > .front > .icon {
+.card > div > .icon {
     position: static;
     display: flex;
     justify-content: center;
 }
 
-.card > .front > .icon.hidden {
-    position: relative;
+.card > .front > .icon {
+    position: static;
     display: flex;
     margin-top: 30px;
     justify-content: center;
 }
 
-.card > .front > .icon > img {
+.card > div > .icon > img {
     width: 60px;
     height: 60px;
 }
