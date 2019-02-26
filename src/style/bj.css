@@ -84,6 +84,28 @@
     }
 }
 
+.card_bot > .unlocked > .back {
+    animation: backing 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.card_bot > .unlocked > .front {
+    animation: fronting 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+.card_bot > .card:nth-child(1) > .back {
+    animation: backing 0.5s ease-in;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+.card_bot > .card:nth-child(1) > .front {
+    animation: fronting 0.5s ease-in;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
 .card_user > .card > .back {
     animation: backing 0.5s ease-in;
     animation-delay: 1s;
