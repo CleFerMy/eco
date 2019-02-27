@@ -15,6 +15,7 @@ import card_c from '../img/c.svg';
 import card_s from '../img/s.svg';
 
 const card = { 'card_h':card_h, 'card_d':card_d, 'card_c':card_c, 'card_s':card_s };
+const winner = { 'n':'', 's':'Ничья', 'u':'Вы победили', 'b':'Победил дилер' };
 
 const osname = platform();
 
@@ -43,7 +44,7 @@ const BJ = props => (
                                     { Object.keys(props.state.cardbot).length > 0 ? (
                                         <div className="card_bot">
                                             { props.state.cardbot.map( (list, i) => 
-                                                <div key={i} className={ `card ${ i === 0 && props.state.opening ? ` unlocked` : `` }` }>
+                                                <div key={i} className={ `card ${ i === 1 && props.state.opening ? ` unlocked` : `` }` }>
                                                     <div className="back">
                                                         <div className={ list.name + ` name` }>{ list.name2 }</div>
                                                         <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
@@ -83,6 +84,7 @@ const BJ = props => (
                                 </div>
                             </div>
                         { props.state.opening && <div className="panelbot"><div className="balancebot">{ props.state.botpoints }</div></div> }
+                        { props.state.bjwin !== 'n' && <div className="winner"><div className="winner_win">{ winner[props.state.bjwin] }</div></div> }
                         { props.state.userpoints > 0 && <div className="paneluser"><div className="balanceuser">{ props.state.userpoints }</div></div> }
                         { Object.keys(props.state.cardbot).length > 1 && !props.state.opening &&
                             <div className='mopen'>

@@ -71,7 +71,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 26',	//Версия сервиса
+			version:	'Beta 1.1, build 27',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -80,7 +80,7 @@ class App extends React.Component {
 			opening:	false,
 			botpoints:	0,
 			userpoints:	0,		
-			bjwin:		'none',
+			bjwin:		'n',
 
 			/* Раздел Setting */
 			//Пусто
@@ -274,7 +274,7 @@ class App extends React.Component {
 		} else if ( data.error ) {
 			console.log(data.error);
 			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
-				await this.setState( { panel: 'system', error: true, } )
+				//await this.setState( { panel: 'system', error: true, } )
 			}
 			await this.setState ( {
 				notif: 		data.error,
@@ -328,7 +328,8 @@ class App extends React.Component {
 			fetching:	false,
 			notifhide: 	false,
 			botpoints:	0,
-			userpoints:	0,	
+			userpoints:	0,
+			bjwin:		'n',
 		} );
 	}
 
@@ -369,7 +370,7 @@ class App extends React.Component {
 				this.apibj();
 				break;
 			case 'add':
-				if ( this.state.bjwin === 'none' ) {
+				if ( this.state.bjwin === 'n' ) {
 					let card = this.state.carduser;
 					let cardbot = this.state.cardbot;
 					let botpoints = this.state.botpoints;
@@ -410,12 +411,40 @@ class App extends React.Component {
 								notifhide: 	true,
 							} );
 						}
+						if ( userpoints > '21' ) {
+							let bjwin = 'n';
+							if ( userpoints === botpoints ) bjwin = 's';
 
+							if ( botpoints < '21' ) bjwin = 'b';
+							console.log(bjwin);
+							this.setState( { 
+								opening:	true,
+								bjwin: 		bjwin,
+							} );
+						}
+						if ( userpoints == '21' ) {
+							let bjwin = 'n';
+							if ( userpoints === botpoints ) bjwin = 's';
+							if ( userpoints > botpoints ) bjwin = 'u';
+							if ( botpoints > userpoints ) bjwin = 'u';
+							console.log(bjwin);
+							this.setState( { 
+								opening:	true,
+								bjwin: 		bjwin,
+							} );
+						}
 					}
 				}
 				break;
 			case 'open':
-				this.setState( { opening:true } );
+				let bjwin = 'n';
+				let user = this.state.userpoints;
+				let bot = this.state.botpoints;
+				if ( user === bot ) bjwin = 's';
+				if ( user > bot && user <= '21' ) bjwin = 'u';
+				if ( bot > user && bot <= '21' ) bjwin = 'b';
+				console.log(bjwin);
+				this.setState( { opening:true, bjwin:bjwin } );
 				break;
 			default: 	break;
 		}
