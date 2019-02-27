@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/eco/static/media/c.0f795caa.svg"
   },
   {
-    "revision": "74b7d4fc0451c622222e",
+    "revision": "1b1bf9f526b722fdae4f",
     "url": "/eco/static/css/main.2df215eb.chunk.css"
   },
   {
@@ -48,28 +48,28 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "74b7d4fc0451c622222e",
-    "url": "/eco/static/js/main.74b7d4fc.chunk.js"
+    "revision": "1b1bf9f526b722fdae4f",
+    "url": "/eco/static/js/main.1b1bf9f5.chunk.js"
   },
   {
     "revision": "5819e3e9d0d98ddf3e2823fe23882ed2",
     "url": "/eco/static/media/s.5819e3e9.svg"
   },
   {
-    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
-    "url": "/eco/static/media/home.e1b5570a.svg"
-  },
-  {
     "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
     "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
-    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
-    "url": "/eco/static/media/job.66bb2d01.svg"
+    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
+    "url": "/eco/static/media/home.e1b5570a.svg"
   },
   {
     "revision": "51cb987cde77e6c3795368eb49a649ab",
     "url": "/eco/static/media/game.51cb987c.svg"
+  },
+  {
+    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
+    "url": "/eco/static/media/job.66bb2d01.svg"
   },
   {
     "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "url": "/eco/static/css/2.6c2e6fe9.chunk.css"
   },
   {
-    "revision": "ff2880790707aa904af6fe16ac481e76",
+    "revision": "4f1a441541f6d06ba2e6f4b4cb324256",
     "url": "/eco/index.html"
   }
 ];
