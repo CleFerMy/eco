@@ -384,7 +384,7 @@ class App extends React.Component {
 					this.setState( { cardbot:cardbot, botpoints:botpoints } );
 				}
 
-				if ( Object.keys(card).length < 9 ) {
+				if ( Object.keys(card).length < 1 ) {
 					card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
 					userpoints = userpoints + coin[name2[randname2]];
 					this.setState( { carduser:card, userpoints:userpoints } );
