@@ -71,7 +71,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 25',	//Версия сервиса
+			version:	'Beta 1.1, build 26',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -80,6 +80,7 @@ class App extends React.Component {
 			opening:	false,
 			botpoints:	0,
 			userpoints:	0,		
+			bjwin:		'none',
 
 			/* Раздел Setting */
 			//Пусто
@@ -138,6 +139,7 @@ class App extends React.Component {
 		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
 		if ( data.response ) {
+			console.log(data.response);
 			switch ( section ) {
 				case 'main':
 					switch ( data.response.type ) {
@@ -270,8 +272,9 @@ class App extends React.Component {
 				money:	money,
 			} );
 		} else if ( data.error ) {
+			console.log(data.error);
 			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
-				await ( { panel: 'system', error: true, } )
+				await this.setState( { panel: 'system', error: true, } )
 			}
 			await this.setState ( {
 				notif: 		data.error,
@@ -366,33 +369,49 @@ class App extends React.Component {
 				this.apibj();
 				break;
 			case 'add':
-				let card = this.state.carduser;
-				let cardbot = this.state.cardbot;
-				let botpoints = this.state.botpoints;
-				let userpoints = this.state.userpoints;
-				let name = ["card_s", "card_h", "card_c", "card_d"];
-				let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
-				let coin = { '2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'0':10,'a':10,'s':10,'d':10,'f':11 };
-				let randname = Math.floor(Math.random() * name.length);
-				let randname2 = Math.floor(Math.random() * name2.length);
+				if ( this.state.bjwin === 'none' ) {
+					let card = this.state.carduser;
+					let cardbot = this.state.cardbot;
+					let botpoints = this.state.botpoints;
+					let userpoints = this.state.userpoints;
+					let name = ["card_s", "card_h", "card_c", "card_d"];
+					let name2 = [ "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "s", "d", "f" ];
+					let coin = { '2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'0':10,'a':10,'s':10,'d':10,'f':11 };
+					let randname = Math.floor(Math.random() * name.length);
+					let randname2 = Math.floor(Math.random() * name2.length);
+					let randname22 = Math.floor(Math.random() * name.length);
+					let randname222 = Math.floor(Math.random() * name2.length);
 
-				if ( Object.keys(card).length < 5 ) {
-					let randnameb = Math.floor(Math.random() * name.length);
-					let randname2b = Math.floor(Math.random() * name2.length);
-					cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb], 'name2':name2[randname2b] };
-					botpoints = botpoints + coin[name2[randname2b]];
-					this.setState( { cardbot:cardbot, botpoints:botpoints } );
-				}
+					if ( !this.state.opening ) {
+						if ( Object.keys(cardbot).length < 2 ) {
+							let randnameb = Math.floor(Math.random() * name.length);
+							let randname2b = Math.floor(Math.random() * name2.length);
+							let randnameb2 = Math.floor(Math.random() * name.length);
+							let randname2b2 = Math.floor(Math.random() * name2.length);
+							cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb], 'name2':name2[randname2b] };
+							cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb2], 'name2':name2[randname2b2] };
+							botpoints = botpoints + coin[name2[randname2b]] + coin[name2[randname2b2]];
+							this.setState( { cardbot:cardbot, botpoints:botpoints } );
+						}
+		
+						if ( Object.keys(card).length < 9 ) {
+							if ( Object.keys(card).length < 2 ) {
+								card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
+								card[Object.keys(card).length] = { 'name':name[randname22], 'name2':name2[randname222] };
+								userpoints = userpoints + coin[name2[randname2]] + coin[name2[randname222]];
+							} else {
+								card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
+								userpoints = userpoints + coin[name2[randname2]];
+							}
+							this.setState( { carduser:card, userpoints:userpoints } );
+						} else {
+							this.setState( {
+								notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
+								notifhide: 	true,
+							} );
+						}
 
-				if ( Object.keys(card).length < 1 ) {
-					card[Object.keys(card).length] = { 'name':name[randname], 'name2':name2[randname2] };
-					userpoints = userpoints + coin[name2[randname2]];
-					this.setState( { carduser:card, userpoints:userpoints } );
-				} else {
-					this.setState( {
-						notif: 		{ 'n':'Вы взяли максимальное количество карт', 'd':'', 'c':'' },
-						notifhide: 	true,
-					} );
+					}
 				}
 				break;
 			case 'open':

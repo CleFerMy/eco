@@ -43,7 +43,7 @@ const BJ = props => (
                                     { Object.keys(props.state.cardbot).length > 0 ? (
                                         <div className="card_bot">
                                             { props.state.cardbot.map( (list, i) => 
-                                                <div key={i} className={ `card ${ i === 1 && props.state.opening ? ` unlocked` : `` }` }>
+                                                <div key={i} className={ `card ${ i === 0 && props.state.opening ? ` unlocked` : `` }` }>
                                                     <div className="back">
                                                         <div className={ list.name + ` name` }>{ list.name2 }</div>
                                                         <div className="icon"><img src={ card[list.name] } alt="icon"></img></div>
