@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/c.0f795caa.svg"
   },
   {
-    "revision": "886cd53df24a46aaec8f",
-    "url": "/eco/static/css/main.48837c57.chunk.css"
+    "revision": "945f48dce6bc7076b9d8",
+    "url": "/eco/static/css/main.2df215eb.chunk.css"
   },
   {
     "revision": "e3776e3d0bde82cb4d0b",
@@ -48,20 +48,16 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "886cd53df24a46aaec8f",
-    "url": "/eco/static/js/main.886cd53d.chunk.js"
+    "revision": "945f48dce6bc7076b9d8",
+    "url": "/eco/static/js/main.945f48dc.chunk.js"
   },
   {
     "revision": "5819e3e9d0d98ddf3e2823fe23882ed2",
     "url": "/eco/static/media/s.5819e3e9.svg"
   },
   {
-    "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
-    "url": "/eco/static/media/bank.b1ee7ffe.svg"
-  },
-  {
-    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
-    "url": "/eco/static/media/job.66bb2d01.svg"
+    "revision": "ba249130a43fa836436cd03023ea5732",
+    "url": "/eco/static/media/shop.ba249130.svg"
   },
   {
     "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
@@ -72,16 +68,20 @@ self.__precacheManifest = [
     "url": "/eco/static/media/game.51cb987c.svg"
   },
   {
-    "revision": "ba249130a43fa836436cd03023ea5732",
-    "url": "/eco/static/media/shop.ba249130.svg"
+    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
+    "url": "/eco/static/media/job.66bb2d01.svg"
   },
   {
-    "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
-    "url": "/eco/static/media/lefto.0b79e7d2.svg"
+    "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
+    "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
     "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
     "url": "/eco/static/media/righto.fc3b0f97.svg"
+  },
+  {
+    "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
+    "url": "/eco/static/media/lefto.0b79e7d2.svg"
   },
   {
     "revision": "d7b47ea0f2aedfbdb291d89795b8e933",
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "url": "/eco/static/css/2.6c2e6fe9.chunk.css"
   },
   {
-    "revision": "4f3584b72f2a5e2ea6acb07f16280565",
+    "revision": "304d226bd8e57350e6d1d0ad38e599b9",
     "url": "/eco/index.html"
   }
 ];
