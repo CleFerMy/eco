@@ -9,10 +9,8 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "source": "git remote set-url origin https://github.com/CleFerMy/eco_source.git",
-    "public": "git remote set-url origin https://github.com/CleFerMy/eco_p.git",
     "push": "git push origin master --force",
-    "commit": "npm run source && npm run push && npm run public && npm run deploy"
+    "commit": "npm run push && npm run deploy"
   },
   "keywords": [],
   "author": "",
