@@ -413,9 +413,9 @@ class App extends React.Component {
 						}
 						if ( userpoints > '21' ) {
 							let bjwin = 'n';
-							if ( userpoints === botpoints ) bjwin = 's';
+							if ( userpoints === botpoints || botpoints > '21'  ) bjwin = 's';
 
-							if ( botpoints < '21' ) bjwin = 'b';
+							if ( botpoints <= '21' ) bjwin = 'b';
 							console.log(bjwin);
 							this.setState( { 
 								opening:	true,
