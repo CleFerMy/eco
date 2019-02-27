@@ -376,7 +376,7 @@ class App extends React.Component {
 				let randname = Math.floor(Math.random() * name.length);
 				let randname2 = Math.floor(Math.random() * name2.length);
 
-				if ( Object.keys(card).length < 2 ) {
+				if ( Object.keys(card).length < 5 ) {
 					let randnameb = Math.floor(Math.random() * name.length);
 					let randname2b = Math.floor(Math.random() * name2.length);
 					cardbot[Object.keys(cardbot).length] = { 'name':name[randnameb], 'name2':name2[randname2b] };
