@@ -35,7 +35,7 @@ const Money = props => (
                                 <Group title="Основной счёт">
                                     <List>
                                         <Cell multiline={true} before={ <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="var(--white)" /></Avatar> } description={ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) + props.dn( props.state.money.c1,[ ' единица',' единицы',' единиц' ] ) ) : 'Неизвестно' }>Ридий</Cell>
-                                        <Cell multiline={true} before={<CircularProgressbar className="moneyitem" percentage={props.state.money.c2/2} text={props.state.money.c2} background styles={ { background: { fill: '#0a4761' }, path: { stroke: 'white' }, text: { fill: 'white', fontSize: '16px' }, trail: { stroke: 'transparent' } } } />} description={ `Занято ${ props.state.money.c2 } из 1000 `}>Неунум</Cell>
+                                        <Cell multiline={true} before={<CircularProgressbar className="moneyitem" percentage={props.state.money.c2/2} text={props.state.money.c2} background styles={ { background: { fill: '#0a4761' }, path: { stroke: 'white' }, text: { fill: 'white', fontSize: '16px' }, trail: { stroke: 'transparent' } } } />} description={ `${ props.state.money.c2 ? ( `Занято ` + props.nl( props.state.money.c2 ) + props.dn( props.state.money.c2,[ ' единица',' единицы',' единиц' ] ) + ` из 1000 ` ) : 'Неизвестно' }`}>Неунум</Cell>
                                     </List>
                                 </Group>
                                 <Group title="Счета в банках">

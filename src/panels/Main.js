@@ -23,6 +23,7 @@ const Main = props => (
 											</List>
 										</Group>
 									}
+									{ Object.keys(props.state.menu).lenght > 0 }
 									<div className="menu">
 										<HorizontalScroll className="menuscroll">
 											<div className="statslist">

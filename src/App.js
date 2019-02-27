@@ -43,6 +43,7 @@ class App extends React.Component {
 			fetching:	false,					//Пулл спиннер
 			notif:		{ 'n':'', 'd':'', 'c':'' },		//Уведомление
 			error:		false,					//Ошибка
+			menu:		{},
 
 			/* Игровое глобальное */
 			money: 		{},						//Деньги
