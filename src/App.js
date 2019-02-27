@@ -71,7 +71,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 27',	//Версия сервиса
+			version:	'Beta 1.1, build 28',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -117,7 +117,7 @@ class App extends React.Component {
 	//Склонение числительных
 	dn (a,b) { let c=[2,0,1,1,1,2];return b[(a%100>4 && a%100<20)?2:c[(a%10<5)?a%10:5]]; }
 	//Скрытие уведомления
-	wc = ( e ) => { console.log('false'); this.setState( { notifhide:false } ); }
+	wc = ( e ) => { this.setState( { notifhide:false } ); }
 	//Деление нулями
 	nl (n) { return n.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 '); }
 	//Просмотр предприятия
@@ -139,15 +139,18 @@ class App extends React.Component {
 		let res 	= await fetch( `https://clefer.ru/eco/${section}.php?method=${method}&${JSON.stringify(params).replace('{', '').replace('}', '').replace(/"/g, '').replace(/:/g, '=').replace(/,/g, '&')}&${window.location.search.replace( '?', '')}` );
 		let data 	= await res.json();
 		if ( data.response ) {
-			console.log(data.response);
 			switch ( section ) {
 				case 'main':
 					switch ( data.response.type ) {
 						case '0':
 							let menu 		= ( data.response.menu ) ? data.response.menu : {};
 							let money 		= ( data.response.money ) ? data.response.money : {};
+							if ( this.state.error ) {
+								await this.setState( { 
+									panel:	'main',
+								 } );
+							}
 							await this.setState( {
-								panel:		'main',
 								error:		false,
 								menu:		menu,
 								money:		money,
@@ -272,7 +275,6 @@ class App extends React.Component {
 				money:	money,
 			} );
 		} else if ( data.error ) {
-			console.log(data.error);
 			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
 				//await this.setState( { panel: 'system', error: true, } )
 			}
@@ -416,7 +418,6 @@ class App extends React.Component {
 							if ( userpoints === botpoints || botpoints > '21'  ) bjwin = 's';
 
 							if ( botpoints <= '21' ) bjwin = 'b';
-							console.log(bjwin);
 							this.setState( { 
 								opening:	true,
 								bjwin: 		bjwin,
@@ -427,7 +428,6 @@ class App extends React.Component {
 							if ( userpoints === botpoints ) bjwin = 's';
 							if ( userpoints > botpoints ) bjwin = 'u';
 							if ( botpoints > userpoints ) bjwin = 'u';
-							console.log(bjwin);
 							this.setState( { 
 								opening:	true,
 								bjwin: 		bjwin,
@@ -443,7 +443,6 @@ class App extends React.Component {
 				if ( user === bot ) bjwin = 's';
 				if ( user > bot && user <= '21' ) bjwin = 'u';
 				if ( bot > user && bot <= '21' ) bjwin = 'b';
-				console.log(bjwin);
 				this.setState( { opening:true, bjwin:bjwin } );
 				break;
 			default: 	break;
