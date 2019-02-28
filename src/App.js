@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from '@vkontakte/vkui-connect';
-import { Epic, View, Avatar, Alert, ActionSheet, ActionSheetItem, IOS, platform } from '@vkontakte/vkui';
+import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import './style/style.css';
 
@@ -25,7 +25,8 @@ import GameKN from './panels/GameKN';
 import GameBJ from './panels/GameBJ';
 import About from './panels/About';
 
-const osname = platform();
+
+const osname = UI.platform();
 
 const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
 
@@ -71,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 28',	//Версия сервиса
+			version:	'Beta 1.1, build 29',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -276,7 +277,7 @@ class App extends React.Component {
 			} );
 		} else if ( data.error ) {
 			if ( data.error.c === 'sign_00' || data.error.c === 'sign_01' || data.error.c === 'sign_02' ) {
-				//await this.setState( { panel: 'system', error: true, } )
+				await this.setState( { error: true, } )
 			}
 			await this.setState ( {
 				notif: 		data.error,
@@ -423,7 +424,7 @@ class App extends React.Component {
 								bjwin: 		bjwin,
 							} );
 						}
-						if ( userpoints == '21' ) {
+						if ( userpoints === '21' ) {
 							let bjwin = 'n';
 							if ( userpoints === botpoints ) bjwin = 's';
 							if ( userpoints > botpoints ) bjwin = 'u';
@@ -468,15 +469,15 @@ class App extends React.Component {
 	//Готовые иконки
 	icons ( name ) {
 		switch ( name ) {
-			case 'bankmoney':		return <Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
-			case 'bankmoneyempty':	return <Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></Avatar>;
-			case 'empty':			return <Avatar style={ { background: '#FFA000' } } size={48}><Icon24Error fill="var(--white)" /></Avatar>;
-			case 'n': 	case 's':	return <Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></Avatar>;
-			case 'u':				return <Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
-			case 'b':				return <Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></Avatar>;
-			case 'cancel':			return <div onClick={ () => this.wc() }><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></Avatar></div>;
-			case 'start':			return <div onClick={ ( e ) => this.apiupdate( e ) } data-type="main" ><Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Replay 			fill="var(--white)" /></Avatar></div>;
-			default: 				return <Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></Avatar>;
+			case 'bankmoney':		return <UI.Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></UI.Avatar>;
+			case 'bankmoneyempty':	return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></UI.Avatar>;
+			case 'empty':			return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24Error fill="var(--white)" /></UI.Avatar>;
+			case 'n': 	case 's':	return <UI.Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></UI.Avatar>;
+			case 'u':				return <UI.Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></UI.Avatar>;
+			case 'b':				return <UI.Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></UI.Avatar>;
+			case 'cancel':			return <div onClick={ () => this.wc() }><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></UI.Avatar></div>;
+			case 'start':			return <div onClick={ ( e ) => this.apiupdate( e ) } data-type="main" ><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Replay 			fill="var(--white)" /></UI.Avatar></div>;
+			default: 				return <UI.Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></UI.Avatar>;
 		}
 	};
 
@@ -485,43 +486,43 @@ class App extends React.Component {
 		switch ( e.currentTarget.dataset.notifs ) {
 			case 'knnew':
 			this.setState( { popout:
-				<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.apikn( '2', {} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+				<UI.Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.apikn( '2', {} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 					<h2>Новая игра</h2>
 					<p>Если вы начнёте новую игру, вам будет засчитано поражение.</p>
-				</Alert>
+				</UI.Alert>
 			} );
 				break;
 			case 'sell_home':
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<UI.Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => console.log( `Продажа недвижимости` ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа недвижимости</h2>
 						<p>Вы действительно хотите продать выбранную недвижимость?</p>
-					</Alert>
+					</UI.Alert>
 				} );
 				break;
 			case 'buy_job':
 				let job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '3', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<UI.Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '3', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Покупка предприятия</h2>
 						<p>Вы действительно хотите купить новое предприятие за { this.nl(this.state.joblast.money) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
-					</Alert>
+					</UI.Alert>
 				} );
 				break;
 			case 'sell_job':
 				job = e.currentTarget.dataset.job;
 				this.setState( { popout:
-					<Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '4', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+					<UI.Alert actions={ [ { title: 'Отмена', autoclose: true, style: 'cancel' }, { title: 'Продолжить', action: () => this.api( 'job', '4', {'id':job} ), autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
 						<h2>Продажа предприятия</h2>
 						<p>Вы действительно хотите продать выбранное предприятие за { this.nl(this.state.joblast.money_sell) + this.dn( this.state.joblast.money, moneyname['1'] ) } ?</p>
-					</Alert>
+					</UI.Alert>
 				} );
 				break;
 			default: 
 				this.setState( { popout:
-					<ActionSheet onClose={ () => this.setState( { popout: null } ) } title="Ошибка" text="Неизвестный источник вызова">
-						{ osname === IOS && <ActionSheetItem autoclose theme="cancel">Отмена</ActionSheetItem> }
-					</ActionSheet>
+					<UI.ActionSheet onClose={ () => this.setState( { popout: null } ) } title="Ошибка" text="Неизвестный источник вызова">
+						{ osname === UI.IOS && <UI.ActionSheetItem autoclose theme="cancel">Отмена</UI.ActionSheetItem> }
+					</UI.ActionSheet>
 				} );
 				break;
 		}
@@ -529,8 +530,8 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<Epic activeStory="home" tabbar={false}>
-				<View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
+			<UI.Epic activeStory="home" tabbar={false}>
+				<UI.View popout={ this.state.popout } id="home" activePanel={this.state.panel}>		
 					<Main 		id="main" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
 					<Money 		id="money" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
 					<Home 		id="home" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} />
@@ -543,8 +544,8 @@ class App extends React.Component {
 					<GameBJ		id="bj"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} cardadd={this.cardadd} />
 					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate}	/>
 					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
-				</View>
-			</Epic>
+				</UI.View>
+			</UI.Epic>
 		);
 	}
 }

@@ -1,6 +1,6 @@
 {
   "name": "eco",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "",
   "main": "index.js",
   "homepage": "https://clefermy.github.io/eco/",
@@ -24,14 +24,14 @@
   },
   "dependencies": {
     "@vkontakte/icons": "^1.4.3",
-    "@vkontakte/vkui": "^2.18.4",
+    "@vkontakte/vkui": "^2.19.0",
     "@vkontakte/vkui-connect": "^1.1.3",
     "core-js": "^2.5.7",
     "eruda": "^1.5.4",
     "prop-types": "^15.6.2",
-    "react": "^16.5.0",
+    "react": "^16.8.3",
     "react-circular-progressbar": "^1.0.0",
-    "react-dom": "^16.5.0"
+    "react-dom": "^16.8.3"
   },
   "browserslist": [
     ">0.2%",

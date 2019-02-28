@@ -7,6 +7,7 @@ import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24Help from '@vkontakte/icons/dist/24/help';
 import Icon24Bug from '@vkontakte/icons/dist/24/bug';
+import Icon24Search from '@vkontakte/icons/dist/24/search';
 
 const osname = platform();
 
@@ -43,6 +44,7 @@ const Setting = props => (
                                 <Group>
                                     <List>
                                         <Cell multiline={true} target="_blank" href={ `https://vk.com/write138269465`} before={ <Avatar style={ { background: 'none' } } size={28}><Icon24Bug /></Avatar> } >Сообщить о проблеме</Cell>
+                                        <Cell multiline={true} before={ <Avatar style={ { background: 'none' } } size={28}><Icon24Search /></Avatar> } >Debug</Cell>
                                     </List>
                                 </Group>
                                 <Group>

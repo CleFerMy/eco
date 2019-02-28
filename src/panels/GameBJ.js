@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, HeaderButton, platform, IOS, Group, Footer, Button, Avatar, List, Cell, Spinner } from '@vkontakte/vkui';
+import * as UI from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon24Coins from '@vkontakte/icons/dist/24/coins';
@@ -17,27 +17,25 @@ import card_s from '../img/s.svg';
 const card = { 'card_h':card_h, 'card_d':card_d, 'card_c':card_c, 'card_s':card_s };
 const winner = { 'n':'', 's':'Ничья', 'u':'Вы победили', 'b':'Победил дилер' };
 
-const osname = platform();
-
-//const win = {'u':'выиграли. На ваш счёт зачислено 10 ридия.','b':'проиграли. С вашего счёта списано 10 ридия.','n':'сыграли в ничью. Вы сохранили свой счёт.'};
+const osname = UI.platform();
 
 const BJ = props => (
-    <Panel id={ props.id }>
-        <PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Blackjack</PanelHeader>
+    <UI.Panel id={ props.id }>
+        <UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>Blackjack</UI.PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
         { props.state.load ? (
             <div>
                 { !props.state.error ? (
                     <div>
                         <div className='balance'>
-                            <Button style={ { background: "rgba(0,0,0,0.2)", color: "#ffc800" } } onClick={ props.go } data-to="money" before={ <Icon24Coins fill="#ffc800" /> }>{ props.state.money.c2 ? ( props.state.money.c2 ) : 'Неизвестно' }</Button>
+                            <UI.Button style={ { background: "rgba(0,0,0,0.2)", color: "#ffc800" } } onClick={ props.go } data-to="money" before={ <Icon24Coins fill="#ffc800" /> }>{ props.state.money.c2 ? ( props.state.money.c2 ) : 'Неизвестно' }</UI.Button>
                         </div>
                             { props.state.notifhide && 
-                                <Group className="notif"> 
-                                    <List>
-                                        <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
-                                    </List>
-                                </Group>
+                                <UI.Group className="notif"> 
+                                    <UI.List>
+                                        <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</UI.Cell>
+                                    </UI.List>
+                                </UI.Group>
                             }
                             <div className="bj_body">
                                 <div>
@@ -88,35 +86,35 @@ const BJ = props => (
                         { props.state.userpoints > 0 && <div className="paneluser"><div className="balanceuser">{ props.state.userpoints }</div></div> }
                         { Object.keys(props.state.cardbot).length > 1 && !props.state.opening &&
                             <div className='mopen'>
-                                <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="var(--white)" /></Avatar></div>
+                                <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="var(--white)" /></UI.Avatar></div>
                             </div>
                         }
                         <div className='madd'>
-                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="add" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="var(--white)" /></Avatar></div>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="add" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="var(--white)" /></UI.Avatar></div>
                         </div>
                         <div className="mreplay">
-                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="replay" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="var(--white)" /></Avatar></div>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="replay" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="var(--white)" /></UI.Avatar></div>
                         </div>
                     </div>
                 ) : (
                     <div>
                         { props.state.notifhide && 
-                            <Group className="notif"> 
-                                <List>
-                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
-                                </List>
-                            </Group>
+                            <UI.Group className="notif"> 
+                                <UI.List>
+                                    <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</UI.Cell>
+                                </UI.List>
+                            </UI.Group>
                         }
                     </div>
                 ) }
             </div>
         ) : (
             <div>
-                <Spinner size="large" style={{ marginTop: 25 }} />
-                <Footer>Загрузка...</Footer>
+                <UI.Spinner size="large" style={{ marginTop: 25 }} />
+                <UI.Footer>Загрузка...</UI.Footer>
             </div>
         ) }
-    </Panel>
+    </UI.Panel>
 );
 
 export default BJ;

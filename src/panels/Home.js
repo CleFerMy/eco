@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Div, Button, Spinner, Footer, PullToRefresh } from '@vkontakte/vkui';
+import * as UI from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
@@ -11,100 +11,100 @@ import Icon24Place from '@vkontakte/icons/dist/24/place';
 import Icon24Flash from '@vkontakte/icons/dist/24/flash';
 import Icon16Users from '@vkontakte/icons/dist/16/users';
 
-const osname = platform();
+const osname = UI.platform();
 
 const Home = props => (
-	<Panel id={ props.id }>
-		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Дом</PanelHeader>
+	<UI.Panel id={ props.id }>
+		<UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>Дом</UI.PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
         { props.state.load ? (
             <div>
                 { !props.state.error ? (
                     <div>
                         <div className='balance'>
-                            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
+                            <UI.Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
                         </div>
-                        <PullToRefresh onRefresh={ () => { props.apiq( "home1" ) } } isFetching={ props.state.fetching }>
+                        <UI.PullToRefresh onRefresh={ () => { props.apiq( "home1" ) } } isFetching={ props.state.fetching }>
                             <div>
                                 { props.state.notifhide && 
-                                    <Group className="notif"> 
-                                        <List>
-                                            <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
-                                        </List>
-                                    </Group>
+                                    <UI.Group className="notif"> 
+                                        <UI.List>
+                                            <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</UI.Cell>
+                                        </UI.List>
+                                    </UI.Group>
                                 }
-                                <Div>
-                                    <Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</Button>
-                                </Div>
-                                <Group title="Дома">
+                                <UI.Div>
+                                    <UI.Button before={ <Icon28AddOutline fill="var(--white)" /> } size="xl">Приобрести</UI.Button>
+                                </UI.Div>
+                                <UI.Group title="Дома">
                                     { Object.keys(props.state.homelist).length > 0 ? (
-                                        <List>
-                                            { props.state.homelist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></Avatar> } description={ list.des }>{ 'Дом №' + list.id }</Cell> ) }
-                                        </List>
+                                        <UI.List>
+                                            { props.state.homelist.map( (list, i) => <UI.Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <UI.Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Home /></UI.Avatar> } description={ list.des }>{ 'Дом №' + list.id }</UI.Cell> ) }
+                                        </UI.List>
                                     ) : (
-                                        <List>
-                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного дома</Cell>
-                                        </List>
+                                        <UI.List>
+                                            <UI.Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного дома</UI.Cell>
+                                        </UI.List>
                                     ) }
-                                </Group>
-                                <Group title="Земельные участки" description="Недоступно" >
+                                </UI.Group>
+                                <UI.Group title="Земельные участки" description="Недоступно" >
                                     { Object.keys(props.state.regionlist).length > 0 ? (
-                                        <List>
-                                            { props.state.regionlist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Place /></Avatar> } description={ list.des }>{ 'Участок №' + list.id }</Cell> ) }
-                                        </List>
+                                        <UI.List>
+                                            { props.state.regionlist.map( (list, i) => <UI.Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <UI.Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Place /></UI.Avatar> } description={ list.des }>{ 'Участок №' + list.id }</UI.Cell> ) }
+                                        </UI.List>
                                     ) : (
-                                        <List>
-                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного земельного участка</Cell>
-                                        </List>
+                                        <UI.List>
+                                            <UI.Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного земельного участка</UI.Cell>
+                                        </UI.List>
                                     ) }
-                                </Group>
-                                <Group title="Автомобили" description="Недоступно" >
+                                </UI.Group>
+                                <UI.Group title="Автомобили" description="Недоступно" >
                                     { Object.keys(props.state.autolist).length > 0 ? (
-                                        <List>
-                                            { props.state.autolist.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Flash /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
-                                        </List>
+                                        <UI.List>
+                                            { props.state.autolist.map( (list, i) => <UI.Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <UI.Avatar type="app" style={ { background: 'none' } } size={48} ><Icon24Flash /></UI.Avatar> } description={ list.des }>{ list.name }</UI.Cell> ) }
+                                        </UI.List>
                                     ) : (
-                                        <List>
-                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного автомобиля</Cell>
-                                        </List>
+                                        <UI.List>
+                                            <UI.Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного автомобиля</UI.Cell>
+                                        </UI.List>
                                     ) }
-                                </Group>
-                                <Group title="Семья" description="Недоступно" >
+                                </UI.Group>
+                                <UI.Group title="Семья" description="Недоступно" >
                                     { Object.keys(props.state.family).length > 0 ? (
-                                        <List>
-                                            { props.state.family.map( (list, i) => <Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <Avatar type="app" style={ { background: 'none' } } size={48} ><Icon16Users /></Avatar> } description={ list.des }>{ list.name }</Cell> ) }
-                                        </List>
+                                        <UI.List>
+                                            { props.state.family.map( (list, i) => <UI.Cell key={i} onClick={ props.go } data-to="homeframe" multiline={true} before={ <UI.Avatar type="app" style={ { background: 'none' } } size={48} ><Icon16Users /></UI.Avatar> } description={ list.des }>{ list.name }</UI.Cell> ) }
+                                        </UI.List>
                                     ) : (
-                                        <List>
-                                            <Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного участника семьи</Cell>
-                                        </List>
+                                        <UI.List>
+                                            <UI.Cell multiline={true} before={ props.icons( 'empty' ) } >У вас нет ни одного участника семьи</UI.Cell>
+                                        </UI.List>
                                     ) }
-                                </Group>
+                                </UI.Group>
                             </div>
-                        </PullToRefresh>
+                        </UI.PullToRefresh>
                         <div className='setting'>
-                            <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
+                            <div onClick={ props.go } data-to="setting" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></UI.Avatar></div>
                         </div>
                     </div>
                 ) : (
                     <div>
                         { props.state.notifhide && 
-                            <Group className="notif"> 
-                                <List>
-                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
-                                </List>
-                            </Group>
+                            <UI.Group className="notif"> 
+                                <UI.List>
+                                    <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</UI.Cell>
+                                </UI.List>
+                            </UI.Group>
                         }
                     </div>
                 ) }
             </div>
         ) : (
             <div>
-                <Spinner size="large" style={{ marginTop: 25 }} />
-                <Footer>Загрузка...</Footer>
+                <UI.Spinner size="large" style={{ marginTop: 25 }} />
+                <UI.Footer>Загрузка...</UI.Footer>
             </div>
         ) }
-	</Panel>
+	</UI.Panel>
 );
 
 export default Home;

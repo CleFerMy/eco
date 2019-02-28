@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Div, Button, Spinner, Footer } from '@vkontakte/vkui';
+import * as UI from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
@@ -11,73 +11,73 @@ import Icon24MoneyTransfer from '@vkontakte/icons/dist/24/money_transfer';
 import Icon24Mention from '@vkontakte/icons/dist/24/mention';
 import Icon24Users from '@vkontakte/icons/dist/24/users';
 
-const osname = platform();
+const osname = UI.platform();
 
 const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
 
 const JobFrame = props => (
-	<Panel id={ props.id }>
-		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Информация</PanelHeader>
+	<UI.Panel id={ props.id }>
+		<UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>Информация</UI.PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
         { props.state.load ? (
 			<div>
                 { !props.state.error ? (
 						<div>
                         <div className='balance'>
-                            <Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</Button>
+                            <UI.Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
                         </div>
                         { props.state.notifhide && 
-                            <Group className="notif"> 
-                                <List>
-                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
-                                </List>
-                            </Group>
+                            <UI.Group className="notif"> 
+                                <UI.List>
+                                    <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</UI.Cell>
+                                </UI.List>
+                            </UI.Group>
                         }
                         { Object.keys(props.state.joblast).length > 0 ? (
                             <div>
-                                <Div className="homeframeimg" ><img className="notifimage" src={ Job } alt="картиночка" /></Div>
-                                <Group title="Подробно">
-                                    <List>
-                                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Mention /></Avatar> } description={ props.state.joblast.name } multiline>Наимнование</Cell>
+                                <UI.Div className="homeframeimg" ><img className="notifimage" src={ Job } alt="картиночка" /></UI.Div>
+                                <UI.Group title="Подробно">
+                                    <UI.List>
+                                        <UI.Cell before={ <UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Mention /></UI.Avatar> } description={ props.state.joblast.name } multiline>Наимнование</UI.Cell>
                                         { props.state.joblast.buy ? ( 
-                                            <Cell onClick={ props.openSheet } data-notifs="buy_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</Cell>
+                                            <UI.Cell onClick={ props.openSheet } data-notifs="buy_job" data-job={ props.state.joblast.id } before={ <UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></UI.Avatar> } description={ props.nl( props.state.joblast.money ) + props.dn( props.state.joblast.money, moneyname['1'] ) } multiline>Купить</UI.Cell>
                                         ) : ( 
-                                            <Cell onClick={ props.openSheet } data-notifs="sell_job" data-job={ props.state.joblast.id } before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></Avatar> } description={ props.nl( props.state.joblast.money_sell ) + props.dn( props.state.joblast.money_sell, moneyname['1'] ) } multiline>Продать</Cell>
+                                            <UI.Cell onClick={ props.openSheet } data-notifs="sell_job" data-job={ props.state.joblast.id } before={ <UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Coins /></UI.Avatar> } description={ props.nl( props.state.joblast.money_sell ) + props.dn( props.state.joblast.money_sell, moneyname['1'] ) } multiline>Продать</UI.Cell>
                                         ) }
-                                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</Cell>
-                                        <Cell before={ <Avatar style={ { background: 'none' } } size={28} ><Icon24Users /></Avatar> } description={ props.nl( props.state.joblast.user ) + props.dn( props.state.joblast.user, [' человек', ' человека', ' человек'] ) } multiline>Владельцы</Cell>
-                                    </List>
-                                </Group>
+                                        <UI.Cell before={ <UI.Avatar style={ { background: 'none' } } size={28} ><Icon24MoneyTransfer /></UI.Avatar> } description={ props.nl( props.state.joblast.des ) + props.dn( props.state.joblast.des, moneyname[props.state.joblast.coin] ) + ` в час` } multiline>Прибыль</UI.Cell>
+                                        <UI.Cell before={ <UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Users /></UI.Avatar> } description={ props.nl( props.state.joblast.user ) + props.dn( props.state.joblast.user, [' человек', ' человека', ' человек'] ) } multiline>Владельцы</UI.Cell>
+                                    </UI.List>
+                                </UI.Group>
                             </div>
                         ) : (
                             <div>
-                                <Spinner size="large" style={{ marginTop: 25 }} />
-                                <Footer>Нет истории просмотров...</Footer>
+                                <UI.Spinner size="large" style={{ marginTop: 25 }} />
+                                <UI.Footer>Нет истории просмотров...</UI.Footer>
                             </div>
                         ) }
                         <div className='setting'>
-                            <div onClick={ props.go } data-to="setting" ><Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></Avatar></div>
+                            <div onClick={ props.go } data-to="setting" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Settings /></UI.Avatar></div>
                         </div>
                     </div>
                 ) : (
                     <div>
                         { props.state.notifhide && 
-                            <Group className="notif"> 
-                                <List>
-                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
-                                </List>
-                            </Group>
+                            <UI.Group className="notif"> 
+                                <UI.List>
+                                    <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</UI.Cell>
+                                </UI.List>
+                            </UI.Group>
                         }
                     </div>
                 ) }
             </div>
 		) : (
 			<div>
-				<Spinner size="large" style={{ marginTop: 25 }} />
-				<Footer>Загрузка...</Footer>
+				<UI.Spinner size="large" style={{ marginTop: 25 }} />
+				<UI.Footer>Загрузка...</UI.Footer>
 			</div>
 		) }
-	</Panel>
+	</UI.Panel>
 );
 
 export default JobFrame;

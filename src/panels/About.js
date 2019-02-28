@@ -1,71 +1,71 @@
 import React from 'react';
-import { Panel, PanelHeader, Avatar, List, Cell, HeaderButton, IOS, platform, Group, Footer, Button, Spinner, PullToRefresh } from '@vkontakte/vkui';
+import * as UI from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 
 import AboutImg from '../img/s.png';
 
-const osname = platform();
+const osname = UI.platform();
 
 const About = props => (
-	<Panel id={ props.id }>
-		<PanelHeader noShadow={ true } addon={<HeaderButton onClick={ () => window.history.back() }>Назад</HeaderButton>} left={ <HeaderButton onClick={ () => window.history.back() } >  { osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</HeaderButton> }>Информация</PanelHeader>
+	<UI.Panel id={ props.id }>
+		<UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>Информация</UI.PanelHeader>
         <div className="hleft"></div><div className="hright"></div>
         { props.state.load ? (
             <div>
                 { !props.state.error ? (
                     <div>
-                        <PullToRefresh onRefresh={ () => { props.apiq( "setting1" ) } } isFetching={ props.state.fetching }>
+                        <UI.PullToRefresh onRefresh={ () => { props.apiq( "setting1" ) } } isFetching={ props.state.fetching }>
                             <div>
                                 { props.state.notifhide && 
-                                    <Group className="notif"> 
-                                        <List>
-                                            <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</Cell>
-                                        </List>
-                                    </Group>
+                                    <UI.Group className="notif"> 
+                                        <UI.List>
+                                            <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `cancel` ) }>{ props.state.notif.n }</UI.Cell>
+                                        </UI.List>
+                                    </UI.Group>
                                 }
                                 <img className="About" src={ AboutImg } alt="Eco"/>
-                                <Footer>{ `Версия ${ props.state.version }` }</Footer>
-                                <Group>
-                                    <List>
-                                        <Cell multiline={true} target="_blank" href="https://vk.com/write138269465" description="Разработчик">Обратная связь</Cell>
-                                    </List>
-                                </Group>
+                                <UI.Footer>{ `Версия ${ props.state.version }` }</UI.Footer>
+                                <UI.Group>
+                                    <UI.List>
+                                        <UI.Cell multiline={true} target="_blank" href="https://vk.com/write138269465" description="Разработчик">Обратная связь</UI.Cell>
+                                    </UI.List>
+                                </UI.Group>
                                 { Object.keys(props.state.contacts).length > 0 ? (
                                     <div>
-                                        <Group title="партнёры">
-                                            <List>
-                                                { props.state.contacts.map( (list, i) => <Cell key={i} multiline={true} target="_blank" href={ `${list.url}` } before={ <Avatar src={ list.img }/> } description={ list.author }>{ list.name }</Cell> ) }
-                                            </List>
-                                        </Group>
+                                        <UI.Group title="партнёры">
+                                            <UI.List>
+                                                { props.state.contacts.map( (list, i) => <UI.Cell key={i} multiline={true} target="_blank" href={ `${list.url}` } before={ <UI.Avatar src={ list.img }/> } description={ list.author }>{ list.name }</UI.Cell> ) }
+                                            </UI.List>
+                                        </UI.Group>
                                     </div>
                                 ) : (
                                     <div>
-                                        <Footer>Список партнёров пуст.<br /><Button style={ { marginTop: 10 } } data-type="more" level="secondary">Повторить</Button></Footer>
+                                        <UI.Footer>Список партнёров пуст.<br /><UI.Button style={ { marginTop: 10 } } data-type="more" level="secondary">Повторить</UI.Button></UI.Footer>
                                     </div>
                                 ) }
                             </div>
-                        </PullToRefresh>
+                        </UI.PullToRefresh>
                     </div>
                 ) : (
                     <div>
                         { props.state.notifhide && 
-                            <Group className="notif"> 
-                                <List>
-                                    <Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</Cell>
-                                </List>
-                            </Group>
+                            <UI.Group className="notif"> 
+                                <UI.List>
+                                    <UI.Cell description={ props.state.notif.d } multiline={true} asideContent={ props.icons( `start` ) }>{ props.state.notif.n }</UI.Cell>
+                                </UI.List>
+                            </UI.Group>
                         }
                     </div>
                 ) }
             </div>
         ) : (
             <div>
-                <Spinner size="large" style={{ marginTop: 25 }} />
-                <Footer>Загрузка...</Footer>
+                <UI.Spinner size="large" style={{ marginTop: 25 }} />
+                <UI.Footer>Загрузка...</UI.Footer>
             </div>
         ) }
-	</Panel>
+	</UI.Panel>
 );
 
 export default About;
