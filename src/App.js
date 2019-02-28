@@ -72,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 30',	//Версия сервиса
+			version:	'Beta 1.1, build 31',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -490,15 +490,15 @@ class App extends React.Component {
 	//Готовые иконки
 	icons ( name ) {
 		switch ( name ) {
-			case 'bankmoney':		return <UI.Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></UI.Avatar>;
-			case 'bankmoneyempty':	return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="var(--white)" /></UI.Avatar>;
-			case 'empty':			return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24Error fill="var(--white)" /></UI.Avatar>;
+			case 'bankmoney':		return <UI.Avatar style={ { background: '#4BB34B' } } size={48}><Icon24MoneyTransfer fill="#fff" /></UI.Avatar>;
+			case 'bankmoneyempty':	return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24MoneyTransfer fill="#fff" /></UI.Avatar>;
+			case 'empty':			return <UI.Avatar style={ { background: '#FFA000' } } size={48}><Icon24Error fill="#fff" /></UI.Avatar>;
 			case 'n': 	case 's':	return <UI.Avatar style={ { background: 'none' } } 	size={this.state.sizebut}></UI.Avatar>;
 			case 'u':				return <UI.Avatar src={ CrossBot } style={ { background: 'none' } } size={this.state.sizebut}></UI.Avatar>;
 			case 'b':				return <UI.Avatar src={ CircleBot } style={ { background: 'none' } } size={this.state.sizebut}></UI.Avatar>;
-			case 'cancel':			return <div onClick={ () => this.wc() }><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="var(--white)" /></UI.Avatar></div>;
-			case 'start':			return <div onClick={ ( e ) => this.apiupdate( e ) } data-type="main" ><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Replay 			fill="var(--white)" /></UI.Avatar></div>;
-			default: 				return <UI.Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="var(--white)" /></UI.Avatar>;
+			case 'cancel':			return <div onClick={ () => this.wc() }><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Cancel 			fill="#fff" /></UI.Avatar></div>;
+			case 'start':			return <div onClick={ ( e ) => this.apiupdate( e ) } data-type="main" ><UI.Avatar style={ { background: '#ebedf0' } } 		size={28}><Icon24Replay 			fill="#fff" /></UI.Avatar></div>;
+			default: 				return <UI.Avatar style={ { background: 'var(--destructive)' } } 		size={28}><Icon24Report 			fill="#fff" /></UI.Avatar>;
 		}
 	};
 

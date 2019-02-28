@@ -21,7 +21,7 @@ const Money = props => (
                 { !props.state.error ? (
                     <div>
                         <div className='balance'>
-                            <UI.Button before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
+                            <UI.Button before={ <Icon24Coins fill="#fff" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
                         </div>
                         <UI.PullToRefresh onRefresh={ () => { props.apiq( "main0" ) } } isFetching={ props.state.fetching }>
                             <div>
@@ -34,7 +34,7 @@ const Money = props => (
                                 }
                                 <UI.Group title="Основной счёт">
                                     <UI.List>
-                                        <UI.Cell multiline={true} before={ <UI.Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="var(--white)" /></UI.Avatar> } description={ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) + props.dn( props.state.money.c1,[ ' единица',' единицы',' единиц' ] ) ) : 'Неизвестно' }>Ридий</UI.Cell>
+                                        <UI.Cell multiline={true} before={ <UI.Avatar style={ { background: '#4BB34B' } } size={48}><Icon24Coins fill="" /></UI.Avatar> } description={ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) + props.dn( props.state.money.c1,[ ' единица',' единицы',' единиц' ] ) ) : 'Неизвестно' }>Ридий</UI.Cell>
                                         <UI.Cell multiline={true} before={<CircularProgressbar className="moneyitem" percentage={props.state.money.c2/2} text={props.state.money.c2} background styles={ { background: { fill: '#0a4761' }, path: { stroke: 'white' }, text: { fill: 'white', fontSize: '16px' }, trail: { stroke: 'transparent' } } } />} description={ `${ props.state.money.c2 ? ( `Занято ` + props.nl( props.state.money.c2 ) + props.dn( props.state.money.c2,[ ' единица',' единицы',' единиц' ] ) + ` из 1000 ` ) : 'Неизвестно' }`}>Неунум</UI.Cell>
                                     </UI.List>
                                 </UI.Group>

@@ -19,7 +19,7 @@ const GameList = props => (
                 { !props.state.error ? (
                     <div>
                         <div className='balance'>
-                            <UI.Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="var(--white)" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
+                            <UI.Button onClick={ props.go } data-to="money" before={ <Icon24Coins fill="#fff" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
                         </div>
                         <UI.PullToRefresh onRefresh={ () => { props.apiq( "job2" ) } } isFetching={ props.state.fetching }>
                             <div>

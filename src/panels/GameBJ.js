@@ -86,14 +86,14 @@ const BJ = props => (
                         { props.state.userpoints > 0 && <div className="paneluser"><div className="balanceuser">{ props.state.userpoints }</div></div> }
                         { Object.keys(props.state.cardbot).length > 1 && !props.state.opening &&
                             <div className='mopen'>
-                                <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="var(--white)" /></UI.Avatar></div>
+                                <div onClick={ ( e ) => props.cardadd( e ) } data-type="open" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Search fill="#fff" /></UI.Avatar></div>
                             </div>
                         }
                         <div className='madd'>
-                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="add" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="var(--white)" /></UI.Avatar></div>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="add" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Add fill="#fff" /></UI.Avatar></div>
                         </div>
                         <div className="mreplay">
-                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="replay" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="var(--white)" /></UI.Avatar></div>
+                            <div onClick={ ( e ) => props.cardadd( e ) } data-type="replay" ><UI.Avatar style={ { background: 'none' } } size={28} ><Icon24Replay fill="#fff" /></UI.Avatar></div>
                         </div>
                     </div>
                 ) : (
