@@ -425,7 +425,7 @@ class App extends React.Component {
 								bjwin: 		bjwin,
 							} );
 						}
-						if ( userpoints === '21' ) {
+						if ( userpoints === 21 ) {
 							let bjwin = 'n';
 							if ( userpoints === botpoints ) bjwin = 's';
 							if ( userpoints > botpoints ) bjwin = 'u';
@@ -461,7 +461,7 @@ class App extends React.Component {
 			this.setState( { debug:true } );
 			eruda.init({
 				container: el,
-				tool: ['console', 'elements'],
+				tool: ['console'],
 				useShadowDom: true,
 				autoScale: true
 			});
