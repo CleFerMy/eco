@@ -8,18 +8,22 @@ import Icon24Settings from '@vkontakte/icons/dist/24/settings';
 import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import FlyMoney from '../img/money.svg';
+
 const osname = UI.platform();
 
 const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
 
 const Money = props => (
 	<UI.Panel id={ props.id }>
-		<UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>Баланс</UI.PanelHeader>
+		<UI.PanelHeader noShadow={ true } addon={<UI.HeaderButton onClick={ () => window.history.back() }>Назад</UI.HeaderButton>} left={ <UI.HeaderButton onClick={ () => window.history.back() } >  { osname === UI.IOS ? <Icon28ChevronBack/> : <Icon24Back/> }</UI.HeaderButton> }>{ props.state.fetching || !props.state.load ? ('Обновление') : ('Баланс') }</UI.PanelHeader>
         <div className="header"><div className="hleft"></div><div className="hright"></div></div>
         { props.state.load ? (
             <div>
                 { !props.state.error ? (
                     <div>
+                        <div className='flymoney1'><img src={ FlyMoney } alt="money" /></div>
+                        <div className='flymoney2'><img src={ FlyMoney } alt="money" /></div>
                         <div className='balance'>
                             <UI.Button before={ <Icon24Coins fill="#fff" /> }>{ props.state.money.c1 ? ( props.nl( props.state.money.c1 ) ) : 'Неизвестно' }</UI.Button>
                         </div>

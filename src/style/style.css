@@ -282,3 +282,65 @@ div .notif, .List {
     display: block;
     margin: 20px auto;
 }
+
+@keyframes moneyfly1 {
+    0% {
+        -ms-transform: translate(10vw,-20vh) rotate(70deg); /* IE 9 */
+        -moz-transform: translate(10vw,-20vh) rotate(70deg); /* Firefox */
+        -o-transform: translate(10vw,-20vh) rotate(70deg); /* Opera */
+        -webkit-transform: translate(10vw,-20vh) rotate(70deg); /* Safari */
+        transform: translate(10vw,-20vh) rotate(70deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: translate(40vw,70vh) rotate(20deg); /* IE 9 */
+        -moz-transform: translate(40vw,70vh) rotate(20deg); /* Firefox */
+        -o-transform: translate(40vw,70vh) rotate(20deg); /* Opera */
+        -webkit-transform: translate(40vw,70vh) rotate(20deg); /* Safari */
+        transform: translate(40vw,70vh) rotate(20deg);
+    }
+}
+
+.flymoney1 {
+    animation: moneyfly1 10s infinite linear;
+    animation-delay: 0s;
+    position: absolute;
+    left: 0;
+    top: -10;
+    width: 70px;
+    z-index: 100;
+}
+
+@keyframes moneyfly2 {
+    0% {
+        -ms-transform: translate(80vw,-20vh) rotate(0deg); /* IE 9 */
+        -moz-transform: translate(80vw,-20vh) rotate(0deg); /* Firefox */
+        -o-transform: translate(80vw,-20vh) rotate(0deg); /* Opera */
+        -webkit-transform: translate(80vw,-20vh) rotate(0deg); /* Safari */
+        transform: translate(80vw,-20vh) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: translate(10vw,75vh) rotate(100deg); /* IE 9 */
+        -moz-transform: translate(10vw,75vh) rotate(100deg); /* Firefox */
+        -o-transform: translate(10vw,75vh) rotate(100deg); /* Opera */
+        -webkit-transform: translate(10vw,75vh) rotate(100deg); /* Safari */
+        transform: translate(10vw,75vh) rotate(100deg);
+    }
+}
+
+.flymoney2 {
+    animation: moneyfly2 8s infinite linear;
+    animation-delay: 1s;
+    position: absolute;
+    left: 0;
+    top: -10;
+    width: 70px;
+    z-index: 100;
+}

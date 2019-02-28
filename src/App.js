@@ -30,17 +30,6 @@ const osname = UI.platform();
 
 const moneyname = [[" ридий"," ридия"," ридия"],[" неунум"," неунума"," неунума"]];
 
-let el = document.createElement('div');
-document.body.appendChild(el);
-
-eruda.init({
-	container: el,
-	tool: ['console'],
-	useShadowDom: true,
-	autoScale: true
-});
-
-
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -83,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 34',	//Версия сервиса
+			version:	'Beta 1.1, build 35',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
