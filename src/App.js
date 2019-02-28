@@ -72,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 31',	//Версия сервиса
+			version:	'Beta 1.1, build 32',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -162,6 +162,14 @@ class App extends React.Component {
 							} );
 							break;
 						default:	break;
+					}
+					if ( data.response.v !== this.state.version ) {
+						this.setState( { popout:
+							<UI.Alert actions={ [ { title: 'Понятно',	autoclose: true, style: 'cancel' } ] } onClose={ () => this.setState( { popout: null } ) } >
+								<h2>Внимание</h2>
+								<p>Вышла новая версия сервиса. Старая версия осталась в кэше. Для очистки кэша часто помогает перезапуск сервиса 2-3 раза.</p>
+							</UI.Alert>
+						} );
 					}
 					break;
 				case 'setting':
