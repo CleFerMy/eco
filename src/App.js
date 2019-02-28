@@ -1,4 +1,5 @@
 import React from 'react';
+import eruda from 'eruda';
 import connect from '@vkontakte/vkui-connect';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
@@ -24,7 +25,6 @@ import GameList from './panels/GameList';
 import GameKN from './panels/GameKN';
 import GameBJ from './panels/GameBJ';
 import About from './panels/About';
-
 
 const osname = UI.platform();
 
@@ -72,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 29',	//Версия сервиса
+			version:	'Beta 1.1, build 30',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -84,7 +84,7 @@ class App extends React.Component {
 			bjwin:		'n',
 
 			/* Раздел Setting */
-			//Пусто
+			debug:		false,
 		};
 		this.apiq		= this.apiq.bind(this);			//API
 		this.apiupdate 	= this.apiupdate.bind(this);	//API
@@ -93,6 +93,7 @@ class App extends React.Component {
 		this.wc			= this.wc.bind(this);			//Статус уведомления
 		this.jf			= this.jf.bind(this);			//Просмотр предприятия
 		this.cardadd	= this.cardadd.bind(this);		//Добавление карты
+		this.debug		= this.debug.bind(this);		//Изменения дебага
 	}
 	
 	//Переход на другой раздел
@@ -450,6 +451,26 @@ class App extends React.Component {
 		}
 	}
 
+	//Debug
+	debug = ( e ) => {
+		let a = e.currentTarget.checked;
+		if (a) {
+			let el = document.createElement('div');
+			document.body.appendChild(el);
+
+			this.setState( { debug:true } );
+			eruda.init({
+				container: el,
+				tool: ['console', 'elements'],
+				useShadowDom: true,
+				autoScale: true
+			});
+		} else {
+			this.setState( { debug:false } );
+			eruda.destroy();
+		}
+	}
+
 	//Включение сервиса
 	componentDidMount() {
 		window.addEventListener('popstate', e => e.preventDefault() & this.Pop(e));
@@ -542,7 +563,7 @@ class App extends React.Component {
 					<GameList	id="gamelist" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 					<GameKN		id="kn"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} kn={this.kn}/>
 					<GameBJ		id="bj"			state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} openSheet={this.openSheet} cardadd={this.cardadd} />
-					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate}	/>
+					<Setting 	id="setting" 	state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl} icons={this.icons} wc={this.wc} apiupdate={this.apiupdate} debug={this.debug} />
 					<About		id="about" 		state={this.state} setState={this.setState} apiq={this.apiq} go={this.go} dn={this.dn} nl={this.nl}	icons={this.icons} wc={this.wc}	apiupdate={this.apiupdate}  />
 				</UI.View>
 			</UI.Epic>
