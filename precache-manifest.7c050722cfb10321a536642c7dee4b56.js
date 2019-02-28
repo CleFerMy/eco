@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/eco/static/media/c.0f795caa.svg"
   },
   {
-    "revision": "72f48ddba74b9bbf1829",
+    "revision": "52ecb87b53181012a8f5",
     "url": "/eco/static/css/main.2df215eb.chunk.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "72f48ddba74b9bbf1829",
-    "url": "/eco/static/js/main.72f48ddb.chunk.js"
+    "revision": "52ecb87b53181012a8f5",
+    "url": "/eco/static/js/main.52ecb87b.chunk.js"
   },
   {
     "revision": "5819e3e9d0d98ddf3e2823fe23882ed2",
@@ -72,12 +72,12 @@ self.__precacheManifest = [
     "url": "/eco/static/media/game.51cb987c.svg"
   },
   {
-    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
-    "url": "/eco/static/media/righto.fc3b0f97.svg"
-  },
-  {
     "revision": "ba249130a43fa836436cd03023ea5732",
     "url": "/eco/static/media/shop.ba249130.svg"
+  },
+  {
+    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
+    "url": "/eco/static/media/righto.fc3b0f97.svg"
   },
   {
     "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
@@ -92,7 +92,7 @@ self.__precacheManifest = [
     "url": "/eco/static/css/2.fcc8ca95.chunk.css"
   },
   {
-    "revision": "c509b9065f7a5d3ce29a99a81f78b831",
+    "revision": "b496ecab64752910ce833dd2319cf2a9",
     "url": "/eco/index.html"
   }
 ];
