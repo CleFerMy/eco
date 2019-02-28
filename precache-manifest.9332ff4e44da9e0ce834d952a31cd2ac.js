@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "0f795caae8945f8a874d81df55d4a3f0",
-    "url": "/eco/static/media/c.0f795caa.svg"
+    "revision": "d84f765d71797309e6b9ac34542d90c8",
+    "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "81a62bcfdf6bffdd6c93",
-    "url": "/eco/static/css/main.2df215eb.chunk.css"
+    "revision": "0fea0c8c05c47f6454a5",
+    "url": "/eco/static/css/main.4b600ce6.chunk.css"
   },
   {
     "revision": "e3776e3d0bde82cb4d0b",
@@ -16,12 +16,16 @@ self.__precacheManifest = [
     "url": "/eco/static/media/b.887410be.jpg"
   },
   {
-    "revision": "918a759502c3e8fafe56",
-    "url": "/eco/static/js/2.918a7595.chunk.js"
+    "revision": "75aa348ba282fd01d1e7",
+    "url": "/eco/static/js/2.75aa348b.chunk.js"
   },
   {
     "revision": "0955caab9d5796325900f0c0a0f1f37b",
     "url": "/eco/static/media/s.0955caab.png"
+  },
+  {
+    "revision": "9e2af1b8d6840a93c0694b47c3bc1e32",
+    "url": "/eco/static/media/money.9e2af1b8.svg"
   },
   {
     "revision": "5d64416fbd89691fb2d773a9e30c60f9",
@@ -44,28 +48,24 @@ self.__precacheManifest = [
     "url": "/eco/static/media/h.e5101751.svg"
   },
   {
-    "revision": "d84f765d71797309e6b9ac34542d90c8",
-    "url": "/eco/static/media/d.d84f765d.svg"
+    "revision": "0fea0c8c05c47f6454a5",
+    "url": "/eco/static/js/main.0fea0c8c.chunk.js"
   },
   {
-    "revision": "81a62bcfdf6bffdd6c93",
-    "url": "/eco/static/js/main.81a62bcf.chunk.js"
+    "revision": "0f795caae8945f8a874d81df55d4a3f0",
+    "url": "/eco/static/media/c.0f795caa.svg"
   },
   {
     "revision": "5819e3e9d0d98ddf3e2823fe23882ed2",
     "url": "/eco/static/media/s.5819e3e9.svg"
   },
   {
-    "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
-    "url": "/eco/static/media/bank.b1ee7ffe.svg"
-  },
-  {
     "revision": "ba249130a43fa836436cd03023ea5732",
     "url": "/eco/static/media/shop.ba249130.svg"
   },
   {
-    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
-    "url": "/eco/static/media/home.e1b5570a.svg"
+    "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
+    "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
     "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
@@ -76,23 +76,27 @@ self.__precacheManifest = [
     "url": "/eco/static/media/game.51cb987c.svg"
   },
   {
-    "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
-    "url": "/eco/static/media/lefto.0b79e7d2.svg"
+    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
+    "url": "/eco/static/media/home.e1b5570a.svg"
   },
   {
     "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
     "url": "/eco/static/media/righto.fc3b0f97.svg"
   },
   {
+    "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
+    "url": "/eco/static/media/lefto.0b79e7d2.svg"
+  },
+  {
     "revision": "d7b47ea0f2aedfbdb291d89795b8e933",
     "url": "/eco/static/media/HoylePlayingCards.d7b47ea0.ttf"
   },
   {
-    "revision": "918a759502c3e8fafe56",
+    "revision": "75aa348ba282fd01d1e7",
     "url": "/eco/static/css/2.fcc8ca95.chunk.css"
   },
   {
-    "revision": "40b5d9c04430db378b62f4564a915307",
+    "revision": "d7c3278de93128c1477e8f9488918395",
     "url": "/eco/index.html"
   }
 ];
