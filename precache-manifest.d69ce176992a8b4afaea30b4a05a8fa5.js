@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "a84fdee48478bc65ef77",
+    "revision": "135d491fac60388d782b",
     "url": "/eco/static/css/main.4b600ce6.chunk.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/h.e5101751.svg"
   },
   {
-    "revision": "a84fdee48478bc65ef77",
-    "url": "/eco/static/js/main.a84fdee4.chunk.js"
+    "revision": "135d491fac60388d782b",
+    "url": "/eco/static/js/main.135d491f.chunk.js"
   },
   {
     "revision": "0f795caae8945f8a874d81df55d4a3f0",
@@ -60,24 +60,20 @@ self.__precacheManifest = [
     "url": "/eco/static/media/s.5819e3e9.svg"
   },
   {
-    "revision": "ba249130a43fa836436cd03023ea5732",
-    "url": "/eco/static/media/shop.ba249130.svg"
+    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
+    "url": "/eco/static/media/home.e1b5570a.svg"
   },
   {
     "revision": "b1ee7ffe9705e7c7dff1e72a3da04ad0",
     "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
-    "revision": "51cb987cde77e6c3795368eb49a649ab",
-    "url": "/eco/static/media/game.51cb987c.svg"
-  },
-  {
     "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
     "url": "/eco/static/media/job.66bb2d01.svg"
   },
   {
-    "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
-    "url": "/eco/static/media/home.e1b5570a.svg"
+    "revision": "51cb987cde77e6c3795368eb49a649ab",
+    "url": "/eco/static/media/game.51cb987c.svg"
   },
   {
     "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
@@ -88,6 +84,10 @@ self.__precacheManifest = [
     "url": "/eco/static/media/righto.fc3b0f97.svg"
   },
   {
+    "revision": "ba249130a43fa836436cd03023ea5732",
+    "url": "/eco/static/media/shop.ba249130.svg"
+  },
+  {
     "revision": "d7b47ea0f2aedfbdb291d89795b8e933",
     "url": "/eco/static/media/HoylePlayingCards.d7b47ea0.ttf"
   },
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "/eco/static/css/2.fcc8ca95.chunk.css"
   },
   {
-    "revision": "a0df9dfb6c19867f48ae78e96829ad06",
+    "revision": "433a943515fefc94faff8227290ed6a1",
     "url": "/eco/index.html"
   }
 ];
