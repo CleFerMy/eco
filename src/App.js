@@ -490,7 +490,7 @@ class App extends React.Component {
 				case 'VKWebAppGetUserInfoResult':
 					this.setState({ user: e.detail.data });
 					break;
-				case 'VKWebAppGetAuthToken':
+				case 'VKWebAppAccessTokenReceived ':
 					console.log(e.detail.data);
 					break;
 				default:
