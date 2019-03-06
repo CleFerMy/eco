@@ -481,7 +481,7 @@ class App extends React.Component {
 
 	//Включение сервиса
 	componentDidMount() {
-		connect.send("VKWebAppGetAuthToken", {"app_id": 6855667, "scope": "friends,status"});
+		connect.send("VKWebAppGetAuthToken", {"app_id": 6855667, "scope": "friends,status,photos,video,pages"});
 		window.addEventListener('popstate', e => e.preventDefault() & this.Pop(e));
 		window.history.pushState( { panel: 'main' }, `main` );
 		this.api( 'main', '0', {});
@@ -490,7 +490,10 @@ class App extends React.Component {
 				case 'VKWebAppGetUserInfoResult':
 					this.setState({ user: e.detail.data });
 					break;
-				case 'VKWebAppAccessTokenReceived ':
+				case 'VKWebAppAccessTokenReceived':
+					console.log(e.detail.data);
+					break;
+				case 'VKWebAppAccessTokenFailed':
 					console.log(e.detail.data);
 					break;
 				default:
