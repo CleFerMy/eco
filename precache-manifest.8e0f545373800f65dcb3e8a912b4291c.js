@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "0fea0c8c05c47f6454a5",
+    "revision": "a84fdee48478bc65ef77",
     "url": "/eco/static/css/main.4b600ce6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/b.887410be.jpg"
   },
   {
-    "revision": "75aa348ba282fd01d1e7",
-    "url": "/eco/static/js/2.75aa348b.chunk.js"
+    "revision": "63d15a54aaaba3325842",
+    "url": "/eco/static/js/2.63d15a54.chunk.js"
   },
   {
     "revision": "0955caab9d5796325900f0c0a0f1f37b",
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/h.e5101751.svg"
   },
   {
-    "revision": "0fea0c8c05c47f6454a5",
-    "url": "/eco/static/js/main.0fea0c8c.chunk.js"
+    "revision": "a84fdee48478bc65ef77",
+    "url": "/eco/static/js/main.a84fdee4.chunk.js"
   },
   {
     "revision": "0f795caae8945f8a874d81df55d4a3f0",
@@ -68,35 +68,35 @@ self.__precacheManifest = [
     "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
-    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
-    "url": "/eco/static/media/job.66bb2d01.svg"
-  },
-  {
     "revision": "51cb987cde77e6c3795368eb49a649ab",
     "url": "/eco/static/media/game.51cb987c.svg"
+  },
+  {
+    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
+    "url": "/eco/static/media/job.66bb2d01.svg"
   },
   {
     "revision": "e1b5570ae0f558e15d1b0b854e171bb5",
     "url": "/eco/static/media/home.e1b5570a.svg"
   },
   {
-    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
-    "url": "/eco/static/media/righto.fc3b0f97.svg"
-  },
-  {
     "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
     "url": "/eco/static/media/lefto.0b79e7d2.svg"
+  },
+  {
+    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
+    "url": "/eco/static/media/righto.fc3b0f97.svg"
   },
   {
     "revision": "d7b47ea0f2aedfbdb291d89795b8e933",
     "url": "/eco/static/media/HoylePlayingCards.d7b47ea0.ttf"
   },
   {
-    "revision": "75aa348ba282fd01d1e7",
+    "revision": "63d15a54aaaba3325842",
     "url": "/eco/static/css/2.fcc8ca95.chunk.css"
   },
   {
-    "revision": "d7c3278de93128c1477e8f9488918395",
+    "revision": "a0df9dfb6c19867f48ae78e96829ad06",
     "url": "/eco/index.html"
   }
 ];
