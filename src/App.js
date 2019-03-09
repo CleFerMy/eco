@@ -72,7 +72,7 @@ class App extends React.Component {
 			joblast:	{},						//Последний просмотр
 
 			/* Раздел About */
-			version:	'Beta 1.1, build 35',	//Версия сервиса
+			version:	'Beta 1.1, build 36',	//Версия сервиса
 			contacts:	{},						//Список партнёров
 
 			/* Раздел Blackjack */
@@ -481,7 +481,6 @@ class App extends React.Component {
 
 	//Включение сервиса
 	componentDidMount() {
-		connect.send("VKWebAppGetAuthToken", {"app_id": 6855667, "scope": "friends,status,photos,video,pages"});
 		window.addEventListener('popstate', e => e.preventDefault() & this.Pop(e));
 		window.history.pushState( { panel: 'main' }, `main` );
 		this.api( 'main', '0', {});
