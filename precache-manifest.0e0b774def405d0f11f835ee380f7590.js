@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/d.d84f765d.svg"
   },
   {
-    "revision": "bb649126c22bd6ff303b",
-    "url": "/eco/static/css/main.4b600ce6.chunk.css"
+    "revision": "72f7ac6a2970337d9a31",
+    "url": "/eco/static/css/main.118c2d53.chunk.css"
   },
   {
     "revision": "e3776e3d0bde82cb4d0b",
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/b.887410be.jpg"
   },
   {
-    "revision": "63d15a54aaaba3325842",
-    "url": "/eco/static/js/2.63d15a54.chunk.js"
+    "revision": "938d4ca9022213a45d78",
+    "url": "/eco/static/js/2.938d4ca9.chunk.js"
   },
   {
     "revision": "0955caab9d5796325900f0c0a0f1f37b",
@@ -48,8 +48,8 @@ self.__precacheManifest = [
     "url": "/eco/static/media/h.e5101751.svg"
   },
   {
-    "revision": "bb649126c22bd6ff303b",
-    "url": "/eco/static/js/main.bb649126.chunk.js"
+    "revision": "72f7ac6a2970337d9a31",
+    "url": "/eco/static/js/main.72f7ac6a.chunk.js"
   },
   {
     "revision": "0f795caae8945f8a874d81df55d4a3f0",
@@ -68,35 +68,35 @@ self.__precacheManifest = [
     "url": "/eco/static/media/bank.b1ee7ffe.svg"
   },
   {
-    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
-    "url": "/eco/static/media/job.66bb2d01.svg"
+    "revision": "ba249130a43fa836436cd03023ea5732",
+    "url": "/eco/static/media/shop.ba249130.svg"
   },
   {
     "revision": "51cb987cde77e6c3795368eb49a649ab",
     "url": "/eco/static/media/game.51cb987c.svg"
   },
   {
-    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
-    "url": "/eco/static/media/righto.fc3b0f97.svg"
+    "revision": "66bb2d019e7a886541a7a5b1fc9c3ba9",
+    "url": "/eco/static/media/job.66bb2d01.svg"
   },
   {
     "revision": "0b79e7d2b8912f8f8a0bfd35ae23b91f",
     "url": "/eco/static/media/lefto.0b79e7d2.svg"
   },
   {
-    "revision": "ba249130a43fa836436cd03023ea5732",
-    "url": "/eco/static/media/shop.ba249130.svg"
+    "revision": "fc3b0f97b6617f9624cfccc41c9e4ca5",
+    "url": "/eco/static/media/righto.fc3b0f97.svg"
   },
   {
     "revision": "d7b47ea0f2aedfbdb291d89795b8e933",
     "url": "/eco/static/media/HoylePlayingCards.d7b47ea0.ttf"
   },
   {
-    "revision": "63d15a54aaaba3325842",
-    "url": "/eco/static/css/2.fcc8ca95.chunk.css"
+    "revision": "938d4ca9022213a45d78",
+    "url": "/eco/static/css/2.c8b38e31.chunk.css"
   },
   {
-    "revision": "bdcf385b1c19d443bac407ed58928430",
+    "revision": "4e4094bd990fcbc8f9e54814078cdb1c",
     "url": "/eco/index.html"
   }
 ];
